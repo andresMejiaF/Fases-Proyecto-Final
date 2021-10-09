@@ -9,21 +9,24 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@MappedSuperclass
-public class Persona implements Serializable {
+public class Mensaje implements Serializable {
     @Id
-    @Column(length = 10)
+    @Column(nullable = false,length = 10)
     @EqualsAndHashCode.Include
     private String codigo;
-    @Column(nullable = false, length = 10)
-    private String nombre;
-    @Column(nullable = false, length = 20, unique = true)
-    private String email;
-    @Column(nullable = false, length = 10)
-    private String password;
+    @Column(nullable = false)
+    private String mensaje;
+    @Column(nullable = false, length = 20)
+    private String emisor;
+    @Column(nullable = false)
+    private LocalDate fecha;
+
+    @ManyToOne
+    private Chat codigoChat;
+
 }

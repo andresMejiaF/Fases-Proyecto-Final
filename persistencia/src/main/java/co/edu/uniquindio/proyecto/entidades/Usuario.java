@@ -15,18 +15,27 @@ import java.util.Objects;
 @ToString
 public class Usuario extends Persona implements Serializable {
 
-
-    @Column(nullable = false, unique = true, length = 120)
-    private String email;
     @ElementCollection
     @Column(nullable = false)
     private Map <String, String> numTelefono;
 
-    @JoinColumn(nullable = false)
+    @OneToMany(mappedBy = "usuarioComprador")
+    private List<Chat> chats;
+
     @ManyToOne
-    private Ciudad ciudad;
+    private Ciudad codigoCiudad;
 
-    @OneToMany(mappedBy = "usuarioPrestamo")
-    private List<Prestamo> prestamos;
+    @OneToMany(mappedBy = "codigoUsuario")
+    private List<Compra> compras;
 
+    @OneToMany(mappedBy = "codigoUsuario")
+    private List<SubastaUsuario> subastaUsuarios;
+    @OneToMany(mappedBy = "codigoUsuario")
+    private List<Comentario> comentarios;
+
+    @OneToMany(mappedBy = "codigoVendedor")
+    private List<Producto> productos;
+
+    @ManyToMany(mappedBy = "codigoUsuario")
+    private List<Producto> codigoProducto;
 }

@@ -22,17 +22,15 @@ public class Ciudad implements Serializable {
     @Column(nullable = false, length = 80)
     private String nombre;
 
-    @OneToMany(mappedBy = "ciudad")
+    @OneToMany(mappedBy = "codigoCiudad")
     private List<Usuario> usuarios;
 
-
+    @OneToMany(mappedBy = "codigoCiudad")
+    private List<Producto> productos;
 
     public Ciudad(String nombre, Integer codigo) {
         this.nombre = nombre;
         this.codigo = codigo;
 
     }
-
-
-
 }
