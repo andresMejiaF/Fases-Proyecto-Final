@@ -23,10 +23,11 @@ public class Compra implements Serializable {
     private LocalDate fechaCompra;
     @Column(nullable = false, length = 10)
     private  String medioPago;
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Usuario codigoUsuario;
+    private Usuario usuario;
 
-    @OneToMany(mappedBy = "codigoCompra")
+    @OneToMany(mappedBy = "compra")
     private List<DetalleCompra> detalleCompras;
 
 }

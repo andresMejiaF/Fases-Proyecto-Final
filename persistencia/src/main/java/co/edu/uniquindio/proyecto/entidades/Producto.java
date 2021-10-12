@@ -18,37 +18,37 @@ public class Producto implements Serializable {
     @Column(nullable = false,length = 10)
     @EqualsAndHashCode.Include
     private String codigo;
-
+    @Column(nullable = false)
     private String nombre;
-
+    @Column(nullable = false)
     private int unidades;
-
+    @Column(nullable = false)
     private String descripcion;
-
+    @Column(nullable = false)
     private double precio;
-
+    @Column(nullable = false)
     private LocalDate fechaLimite;
-
+    @Column(nullable = false)
     private double descuento;
-
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Usuario codigoVendedor;
+    private Usuario vendedor;
 
-    @ManyToMany
-    private List<Usuario> codigoUsuario;
-    @OneToMany(mappedBy = "codigoProducto")
+    @ManyToMany(mappedBy = "producto")
+    private List<Usuario> usuarios;
+    @OneToMany(mappedBy = "producto")
     private List<Comentario> comentarios;
 
-    @OneToMany(mappedBy = "codigoProducto")
+    @OneToMany(mappedBy = "producto")
     private List<DetalleCompra> detalleCompras;
-
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Ciudad codigoCiudad;
+    private Ciudad ciudad;
 
-    @OneToMany(mappedBy = "codigoProducto")
+    @OneToMany(mappedBy = "producto")
     private List<Subasta> subastas;
     @ManyToMany
-    private List<Categoria> codigoCategorias;
+    private List<Categoria> categorias;
 
     @ElementCollection
     @Column(nullable = false)

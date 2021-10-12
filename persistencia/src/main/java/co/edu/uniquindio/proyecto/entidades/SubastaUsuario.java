@@ -22,11 +22,11 @@ public class SubastaUsuario implements Serializable {
 
     @Column(nullable = false)
     private LocalDate fechaSubasta;
-
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Usuario codigoUsuario;
-
+    private Usuario usuario;
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Subasta codigoSubasta;
+    private Subasta subasta;
 
 }

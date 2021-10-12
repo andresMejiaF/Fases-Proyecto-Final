@@ -17,25 +17,25 @@ public class Usuario extends Persona implements Serializable {
 
     @ElementCollection
     @Column(nullable = false)
-    private Map <String, String> numTelefono;
+    private Map <String, String> Telefono;
 
     @OneToMany(mappedBy = "usuarioComprador")
     private List<Chat> chats;
-
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Ciudad codigoCiudad;
+    private Ciudad ciudad;
 
-    @OneToMany(mappedBy = "codigoUsuario")
+    @OneToMany(mappedBy = "usuario")
     private List<Compra> compras;
 
-    @OneToMany(mappedBy = "codigoUsuario")
+    @OneToMany(mappedBy = "usuario")
     private List<SubastaUsuario> subastaUsuarios;
-    @OneToMany(mappedBy = "codigoUsuario")
+    @OneToMany(mappedBy = "usuario")
     private List<Comentario> comentarios;
 
-    @OneToMany(mappedBy = "codigoVendedor")
+    @OneToMany(mappedBy = "vendedor")
     private List<Producto> productos;
 
-    @ManyToMany(mappedBy = "codigoUsuario")
-    private List<Producto> codigoProducto;
+    @ManyToMany
+    private List<Producto> producto;
 }

@@ -23,7 +23,7 @@ public class Categoria implements Serializable {
     @Column(nullable = false, length = 10)
     private String nombre;
 
-    @ManyToMany(mappedBy = "codigoCategorias")
-    private List<Producto> codigoProductos;
+    @ManyToMany(mappedBy = "categorias")
+    private List<Producto> productos;
 
 }

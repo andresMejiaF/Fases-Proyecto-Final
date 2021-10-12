@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -26,9 +23,10 @@ public class DetalleCompra implements Serializable {
 
     @Column(nullable = false)
     private double precioProducto;
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Producto codigoProducto;
-
+    private Producto producto;
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Compra codigoCompra;
+    private Compra compra;
 }

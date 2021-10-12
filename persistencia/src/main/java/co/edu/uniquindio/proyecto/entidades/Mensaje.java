@@ -25,8 +25,8 @@ public class Mensaje implements Serializable {
     private String emisor;
     @Column(nullable = false)
     private LocalDate fecha;
-
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Chat codigoChat;
+    private Chat chat;
 
 }

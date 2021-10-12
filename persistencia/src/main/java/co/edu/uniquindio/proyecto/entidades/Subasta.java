@@ -20,10 +20,11 @@ public class Subasta implements Serializable {
 
     @Column(nullable = false)
     private LocalDate fechaSubasta;
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Producto codigoProducto;
+    private Producto producto;
 
-    @OneToMany(mappedBy = "codigoSubasta")
+    @OneToMany(mappedBy = "subasta")
     private List<SubastaUsuario> subastaUsuarios;
 
 }

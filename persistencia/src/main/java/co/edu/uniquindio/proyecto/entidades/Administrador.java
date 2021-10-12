@@ -15,4 +15,5 @@ import java.io.Serializable;
 @ToString
 public class Administrador extends Persona implements Serializable {
 
+
 }

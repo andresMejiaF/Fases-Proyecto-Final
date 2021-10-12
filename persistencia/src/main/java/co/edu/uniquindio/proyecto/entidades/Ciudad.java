@@ -22,10 +22,10 @@ public class Ciudad implements Serializable {
     @Column(nullable = false, length = 80)
     private String nombre;
 
-    @OneToMany(mappedBy = "codigoCiudad")
+    @OneToMany(mappedBy = "ciudad")
     private List<Usuario> usuarios;
 
-    @OneToMany(mappedBy = "codigoCiudad")
+    @OneToMany(mappedBy = "ciudad")
     private List<Producto> productos;
 
     public Ciudad(String nombre, Integer codigo) {

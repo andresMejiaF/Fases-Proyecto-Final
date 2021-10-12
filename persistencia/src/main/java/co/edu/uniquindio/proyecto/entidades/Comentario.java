@@ -28,9 +28,11 @@ public class Comentario implements Serializable {
     @Column(nullable = false)
     private double calificacion;
 
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Usuario codigoUsuario;
+    private Usuario usuario;
 
+    @JoinColumn(nullable = false)
     @ManyToOne
-    private Producto codigoProducto;
+    private Producto producto;
 }
