@@ -12,12 +12,12 @@ import java.util.Objects;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
-@ToString
+
 public class Ciudad implements Serializable {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(nullable = false, length = 30)
     private Integer codigo;
     @Column(nullable = false, length = 80)
     private String nombre;
@@ -32,5 +32,12 @@ public class Ciudad implements Serializable {
         this.nombre = nombre;
         this.codigo = codigo;
 
+    }
+
+    @Override
+    public String toString() {
+        return "Ciudad{" +
+                "codigo=" + codigo +
+                " nombre="+ nombre +'}';
     }
 }

@@ -12,7 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable {
 
     @ElementCollection
@@ -20,22 +20,41 @@ public class Usuario extends Persona implements Serializable {
     private Map <String, String> Telefono;
 
     @OneToMany(mappedBy = "usuarioComprador")
+    @ToString.Exclude
     private List<Chat> chats;
+
     @JoinColumn(nullable = false)
     @ManyToOne
     private Ciudad ciudad;
 
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Compra> compras;
 
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<SubastaUsuario> subastaUsuarios;
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Comentario> comentarios;
 
     @OneToMany(mappedBy = "vendedor")
+    @ToString.Exclude
     private List<Producto> productos;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Producto> producto;
+
+
+    public Usuario(String codigo, String nombre, String email, String password, Map<String, String> telefono, Ciudad ciudad) {
+        super(codigo, nombre, email, password);
+        this.Telefono = telefono;
+        this.ciudad=ciudad;
+    }
+
+
+
+
+
 }
