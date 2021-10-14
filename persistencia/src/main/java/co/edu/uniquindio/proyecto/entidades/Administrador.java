@@ -12,8 +12,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Administrador extends Persona implements Serializable {
 
+    public Administrador(String codigo, String nombre, String email, String password) {
+        super(codigo, nombre, email, password);
+    }
 
 }

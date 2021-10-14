@@ -26,17 +26,13 @@ public class UsuarioTest {
     private CiudadRepo ciudadRepo;
 
     @Test
-    @Sql("classpath:usuarios.sql")
+    @Sql("classpath:pruebas.sql")
     public void registrarTest(){
         Ciudad ciudad= ciudadRepo.findById(123).orElse(null);
-       // Ciudad ciudad = new Ciudad("Armenia", 1222);
-        //ciudadRepo.save(ciudad);
         Map<String, String> telefonos= new HashMap<>();
         telefonos.put("Casa", "3104327744");
         telefonos.put("Celular", "3214161");
         Usuario usuario= new Usuario("123", "Andres mejia", "Andress@email", "mejia01", telefonos, ciudad);
-
-
         Usuario usuarioGuardado= usuarioRepo.save(usuario);
         System.out.println(usuarioGuardado);
         //regresaun valor diferente de null, es decir; la prueba paso
@@ -44,7 +40,7 @@ public class UsuarioTest {
 
     }
     @Test
-    @Sql("classpath:usuarios.sql")
+    @Sql("classpath:pruebas.sql")
     public void eliminarTest(){
 
         usuarioRepo.deleteById("456");
@@ -55,7 +51,7 @@ public class UsuarioTest {
     }
 
     @Test
-    @Sql("classpath:usuarios.sql")
+    @Sql("classpath:pruebas.sql")
     public void actualizarTest(){
 
 
@@ -72,7 +68,7 @@ public class UsuarioTest {
     }
 
     @Test
-    @Sql("classpath:usuarios.sql")
+    @Sql("classpath:pruebas.sql")
     public  void listarTest(){
 
         List<Usuario> usuarios= usuarioRepo.findAll();

@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +11,8 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+@AllArgsConstructor
 public class Mensaje implements Serializable {
     @Id
     @Column(nullable = false,length = 10)
@@ -28,5 +27,8 @@ public class Mensaje implements Serializable {
     @JoinColumn(nullable = false)
     @ManyToOne
     private Chat chat;
+
+
+
 
 }
