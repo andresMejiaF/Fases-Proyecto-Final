@@ -11,6 +11,8 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@AllArgsConstructor
+@ToString
 public class SubastaUsuario implements Serializable {
     @Id
     @Column(nullable = false,length = 10)
@@ -28,5 +30,6 @@ public class SubastaUsuario implements Serializable {
     @JoinColumn(nullable = false)
     @ManyToOne
     private Subasta subasta;
+
 
 }

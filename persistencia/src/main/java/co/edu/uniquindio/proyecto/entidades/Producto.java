@@ -13,6 +13,7 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Producto implements Serializable {
     @Id
     @Column(nullable = false,length = 10)
@@ -30,6 +31,7 @@ public class Producto implements Serializable {
     private LocalDate fechaLimite;
     @Column(nullable = false)
     private double descuento;
+
     @JoinColumn(nullable = false)
     @ManyToOne
     private Usuario vendedor;
@@ -37,15 +39,18 @@ public class Producto implements Serializable {
     @ManyToMany(mappedBy = "producto")
     private List<Usuario> usuarios;
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Comentario> comentarios;
 
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<DetalleCompra> detalleCompras;
     @JoinColumn(nullable = false)
     @ManyToOne
     private Ciudad ciudad;
 
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Subasta> subastas;
     @ManyToMany
     private List<Categoria> categorias;
