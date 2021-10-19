@@ -10,6 +10,10 @@
         <module name="persistencia" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="persistencia" target="11" />
+      <module name="proyecto-asignatura" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

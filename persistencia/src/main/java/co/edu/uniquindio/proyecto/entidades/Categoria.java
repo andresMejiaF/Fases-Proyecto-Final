@@ -14,13 +14,14 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Categoria implements Serializable {
     @Id
-    @Column(nullable = false,length = 10)
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
     private String codigo;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false)
     private String nombre;
 
     @ManyToMany(mappedBy = "categorias")

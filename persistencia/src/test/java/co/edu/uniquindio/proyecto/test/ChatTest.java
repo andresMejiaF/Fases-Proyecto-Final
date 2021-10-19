@@ -25,7 +25,7 @@ public class ChatTest {
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public void regirtrarTest(){
+    public void registrarTest(){
 
         Usuario usuario = usuarioRepo.findById("456").orElse(null);
        // Administrador administrador = new Administrador("11928", "mejiaAndres", "andress.mejiaf@", "andresM201");

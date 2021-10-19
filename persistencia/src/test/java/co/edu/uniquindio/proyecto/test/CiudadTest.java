@@ -22,7 +22,7 @@ public class CiudadTest {
     private CiudadRepo ciudadRepo;
 
     @Test
-    public void regirtrarTest(){
+    public void registrarTest(){
 
         Ciudad ciudad = new Ciudad("Manizales",6567);
 

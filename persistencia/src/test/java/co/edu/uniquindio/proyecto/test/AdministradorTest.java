@@ -47,6 +47,7 @@ public class AdministradorTest {
         Administrador administradorBuscado= administradorRepo.findById("119").orElse(null);
         Assertions.assertEquals("nuevoEmail@email", administradorBuscado.getEmail());
     }
+
     @Test
     @Sql("classpath:pruebas.sql")
     public  void listarTest(){

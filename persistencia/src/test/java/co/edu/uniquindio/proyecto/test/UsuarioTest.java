@@ -35,7 +35,6 @@ public class UsuarioTest {
         Usuario usuario= new Usuario("123", "Andres mejia", "Andress@email", "mejia01", telefonos, ciudad);
         Usuario usuarioGuardado= usuarioRepo.save(usuario);
         System.out.println(usuarioGuardado);
-        //regresaun valor diferente de null, es decir; la prueba paso
         Assertions.assertNotNull(usuarioGuardado);
 
     }
@@ -43,11 +42,11 @@ public class UsuarioTest {
     @Sql("classpath:pruebas.sql")
     public void eliminarTest(){
 
-        usuarioRepo.deleteById("456");
+        usuarioRepo.deleteById("372");
 
-        Usuario usuarioBucado= usuarioRepo.findById("456").orElse(null);
+        Usuario usuarioBuscado= usuarioRepo.findById("372").orElse(null);
 
-        Assertions.assertNull(usuarioBucado);
+        Assertions.assertNull(usuarioBuscado);
     }
 
     @Test

@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Subasta implements Serializable {
     @Id
     @Column(nullable = false,length = 10)
@@ -25,6 +26,12 @@ public class Subasta implements Serializable {
     private Producto producto;
 
     @OneToMany(mappedBy = "subasta")
+    @ToString.Exclude
     private List<SubastaUsuario> subastaUsuarios;
 
+    public Subasta(String codigo, LocalDate fechaSubasta, Producto producto ){
+        this.codigo=codigo;
+        this.fechaSubasta=fechaSubasta;
+        this.producto=producto;
+    }
 }

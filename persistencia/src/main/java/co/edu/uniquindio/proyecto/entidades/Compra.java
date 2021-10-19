@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Compra implements Serializable {
 
     @Id
@@ -21,13 +22,20 @@ public class Compra implements Serializable {
     private String codigo;
     @Column(nullable = false)
     private LocalDate fechaCompra;
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false)
     private  String medioPago;
     @JoinColumn(nullable = false)
     @ManyToOne
     private Usuario usuario;
 
     @OneToMany(mappedBy = "compra")
+    @ToString.Exclude
     private List<DetalleCompra> detalleCompras;
 
+    public Compra(String codigo, LocalDate fechaCompra, String medioPago, Usuario usuario) {
+        this.codigo = codigo;
+        this.fechaCompra=fechaCompra;
+        this.medioPago=medioPago;
+        this.usuario=usuario;
+    }
 }

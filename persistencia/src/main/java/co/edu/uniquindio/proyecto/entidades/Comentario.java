@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@AllArgsConstructor
+@ToString
 public class Comentario implements Serializable {
     @Id
     @Column(nullable = false,length = 10)

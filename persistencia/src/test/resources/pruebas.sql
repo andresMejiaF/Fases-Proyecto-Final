@@ -27,3 +27,25 @@ insert into producto values ("9090", "consola ultimo modelo", 0.10,"2021/10/9","
 insert into producto values ("22324", "moto ultimo modelo", 0.13,"2021/10/4","yamaha 650",800.000, 2,3312, "888");
 insert into producto values ("4546", "nevera ultimo modelo", 0.30,"2021/09/1","Nevera",550.000, 15, 123, "456");
 
+insert into subasta values ("8787",  "2000/11/12", "9090");
+insert into subasta values ("9477",  "2021/09/22", "22324");
+insert into subasta values ("7480", "2021/08/19", "4546");
+
+insert into comentario values ("934",12,"2021/04/29","Buen producto", "Producto bien calificado", "9090", "456");
+insert into comentario values ("936",10,"2021/04/29","Mal producto", "Producto mal calificado", "22324", "777");
+insert into comentario values ("937",12,"2021/04/29","Perfecto funcionamiento", "Producto bien calificado", "9090", "888");
+
+
+insert into compra values ("020", "2021/11/19", "tarjeta debito", "456");
+insert into compra values ("021", "2020/02/29", "tarjeta credito", "777");
+insert into compra values ("032", "2019/10/25", "efectivo", "888");
+
+insert into detalle_compra values ("372", 89.000, 2, "020", "9090");
+insert into detalle_compra values ("373", 90.000,12, "021", "22324");
+insert into detalle_compra values ("984", 28.000,10, "032", "4546");
+
+
+insert into categoria values ("3672", "Electrodomesticos");
+insert into categoria values ("3462", "Area de juegos");
+insert into categoria values ("3214","Automoviles");
+

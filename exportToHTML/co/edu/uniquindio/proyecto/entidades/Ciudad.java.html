@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Ciudad.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Ciudad.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">co.edu.uniquindio.proyecto.entidades</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">lombok.*</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">javax.persistence.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.Serializable</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Objects</span><span class="s0">;</span>
+
+<span class="s1">@Entity</span>
+<span class="s1">@Getter</span>
+<span class="s1">@Setter</span>
+<span class="s1">@EqualsAndHashCode(onlyExplicitlyIncluded = </span><span class="s0">true</span><span class="s1">)</span>
+<span class="s1">@NoArgsConstructor</span>
+
+<span class="s0">public class </span><span class="s1">Ciudad </span><span class="s0">implements </span><span class="s1">Serializable {</span>
+
+    <span class="s1">@Id</span>
+    <span class="s1">@EqualsAndHashCode.Include</span>
+    <span class="s1">@Column(nullable = </span><span class="s0">false, </span><span class="s1">length = </span><span class="s2">30</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">Integer codigo</span><span class="s0">;</span>
+    <span class="s1">@Column(nullable = </span><span class="s0">false, </span><span class="s1">length = </span><span class="s2">80</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">String nombre</span><span class="s0">;</span>
+
+    <span class="s1">@OneToMany(mappedBy = </span><span class="s3">&quot;ciudad&quot;</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">List&lt;Usuario&gt; usuarios</span><span class="s0">;</span>
+
+    <span class="s1">@OneToMany(mappedBy = </span><span class="s3">&quot;ciudad&quot;</span><span class="s1">)</span>
+    <span class="s1">@ToString.Exclude</span>
+    <span class="s0">private </span><span class="s1">List&lt;Producto&gt; productos</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Ciudad(String nombre</span><span class="s0">, </span><span class="s1">Integer codigo) {</span>
+        <span class="s0">this</span><span class="s1">.nombre = nombre</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.codigo = codigo</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">String toString() {</span>
+        <span class="s0">return </span><span class="s3">&quot;Ciudad{&quot; </span><span class="s1">+</span>
+                <span class="s3">&quot;codigo=&quot; </span><span class="s1">+ codigo +</span>
+                <span class="s3">&quot; nombre=&quot;</span><span class="s1">+ nombre +</span><span class="s3">'}'</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
