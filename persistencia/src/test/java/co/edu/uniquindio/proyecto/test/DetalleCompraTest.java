@@ -17,22 +17,26 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.util.List;
-
+/**
+ * Se crean los archivos de testeo para DetalleCompra,
+ * Aqui probamos el modelo mediante el archivo sql para
+ *  pruebas (pruebas.sql)
+ */
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 public class DetalleCompraTest {
 
 
         @Autowired
-        private DetalleCompraRepo detalleCompraRepo;
+        private DetalleCompraRepo detalleCompraRepo; //Repositorio
         @Autowired
-        private ProductoRepo productoRepo;
+        private ProductoRepo productoRepo;//Repo auxiliar
         @Autowired
-        private CompraRepo compraRepo;
+        private CompraRepo compraRepo;//Repo Auxiliar
 
         @Test
         @Sql("classpath:pruebas.sql")
-        public void registrarTest(){
+        public void registrarTest(){//Se crea la entidad para guardarla en el repositorio y verificar el registro
 
             Compra compra= compraRepo.findById("020").orElse(null);
             Producto producto= productoRepo.findById("9090").orElse(null);
@@ -46,8 +50,8 @@ public class DetalleCompraTest {
 
 
         @Test
-        @Sql("classpath:pruebas.sql")
-        public void eliminarTest(){
+        @Sql("classpath:pruebas.sql")//Archivo .sql
+        public void eliminarTest(){//Se elimina una entidad del repositorio mediante su llave primaria
 
 
             detalleCompraRepo.deleteById("372");
@@ -59,7 +63,7 @@ public class DetalleCompraTest {
 
         @Test
         @Sql("classpath:pruebas.sql")
-        public void actualizarTest(){
+        public void actualizarTest(){//se actualiza una entidad del repositorio
 
             DetalleCompra detalleCompra = detalleCompraRepo.findById("372").orElse(null);;
             DetalleCompra guardado = detalleCompraRepo.save(detalleCompra);
@@ -70,7 +74,7 @@ public class DetalleCompraTest {
         }
         @Test
         @Sql("classpath:pruebas.sql")
-        public  void listarTest(){
+        public  void listarTest(){//Se listan las entidades creadas en pruebas.sql
             List<DetalleCompra> detalleCompras= detalleCompraRepo.findAll();
             detalleCompras.forEach(detalleCompra -> System.out.println(detalleCompra));
         }

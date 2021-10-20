@@ -13,6 +13,9 @@ import java.time.LocalDate;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @ToString
+/**
+ * Clase SubastaUsuario, restricciones para atributos y uso de lombok
+ */
 public class SubastaUsuario implements Serializable {
     @Id
     @Column(nullable = false,length = 10)

@@ -19,7 +19,10 @@ public class Chat implements Serializable {
     @EqualsAndHashCode.Include
     private String codigo;
 
-
+    /**
+     * Se crean relaciones (uno a muchos y muchos a uno)
+     * también se crea un constructor
+     */
     @OneToMany(mappedBy = "chat")
     @ToString.Exclude
     private List<Mensaje> mensajes;

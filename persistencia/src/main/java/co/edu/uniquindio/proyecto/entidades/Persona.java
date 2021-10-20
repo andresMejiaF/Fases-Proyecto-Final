@@ -4,16 +4,22 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+//Especificacion de tablas en la Herencia
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
 @AllArgsConstructor
 @ToString
+/**
+ * Se crea la clase padre donde dependen otras clases como usuario
+ * o Administrador, todas implementan Serializable para poder
+ * ser manipulados pos Mysql
+ */
 public class Persona implements Serializable {
     @Id
     @Column(length = 30)

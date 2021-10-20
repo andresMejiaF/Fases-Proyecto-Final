@@ -15,6 +15,10 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+/**
+ * Se crea una llave principal con una condición
+ * se crea una variable nombre y una lista productos
+ */
 public class Categoria implements Serializable {
     @Id
     @Column(nullable = false)

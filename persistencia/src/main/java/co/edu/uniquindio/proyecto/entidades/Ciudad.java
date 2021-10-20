@@ -5,16 +5,20 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
+
 
 @Entity
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
-
+@ToString
 public class Ciudad implements Serializable {
-
+    /**
+     * Se crean condiciones como evitar espacios vacios
+     * se crean variables y listas, tambien excluimos las
+     * relaciones OneToMany del toString de Ciudad
+     */
     @Id
     @EqualsAndHashCode.Include
     @Column(nullable = false, length = 30)
@@ -23,6 +27,7 @@ public class Ciudad implements Serializable {
     private String nombre;
 
     @OneToMany(mappedBy = "ciudad")
+    @ToString.Exclude
     private List<Usuario> usuarios;
 
     @OneToMany(mappedBy = "ciudad")
@@ -35,10 +40,5 @@ public class Ciudad implements Serializable {
 
     }
 
-    @Override
-    public String toString() {
-        return "Ciudad{" +
-                "codigo=" + codigo +
-                " nombre="+ nombre +'}';
-    }
+
 }

@@ -13,6 +13,9 @@ import java.time.LocalDate;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 @AllArgsConstructor
+/**
+ * Clase Mensaje, restricciones para atributos y uso de lombok
+ */
 public class Mensaje implements Serializable {
     @Id
     @Column(nullable = false,length = 10)

@@ -13,21 +13,25 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.util.List;
-
+/**
+ * Se crean los archivos de testeo para Producto,
+ * Aqui probamos el modelo mediante el archivo sql para
+ *  pruebas (pruebas.sql)
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ProductoTest {
 
     @Autowired
-    private ProductoRepo productoRepo;
+    private ProductoRepo productoRepo; //Repositorio
     @Autowired
-    private CiudadRepo ciudadRepo;
+    private CiudadRepo ciudadRepo;//Repo auxiliar
     @Autowired
-    private UsuarioRepo usuarioRepo;
+    private UsuarioRepo usuarioRepo;//Repo auxiliar
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public void regirtrarTest(){
+    public void regirtrarTest(){ //Se crea la entidad para guardarla en el repositorio y verificar el registro
 
         Ciudad ciudad = ciudadRepo.findById(123).orElse(null);
         Usuario usuario = usuarioRepo.findById("456").orElse(null);
@@ -48,8 +52,8 @@ public class ProductoTest {
     }
 
     @Test
-    @Sql("classpath:pruebas.sql")
-    public void eliminarTest(){
+    @Sql("classpath:pruebas.sql")//Archivo sql
+    public void eliminarTest(){ //Se elimina una entidad del repositorio mediante su llave primaria
 
         productoRepo.deleteById("9090");
 
@@ -60,7 +64,7 @@ public class ProductoTest {
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public void actualizarTest(){
+    public void actualizarTest(){ //se actualiza una entidad del repositorio
 
         Producto guardado = productoRepo.findById("9090").orElse(null);
         guardado.setNombre("Play 5");
@@ -70,7 +74,7 @@ public class ProductoTest {
     }
     @Test
     @Sql("classpath:pruebas.sql")
-    public  void listarTest(){
+    public  void listarTest(){//Se listan las entidades creadas en pruebas.sql
         List<Producto> productos= productoRepo.findAll();
         productos.forEach(producto -> System.out.println(producto));
     }

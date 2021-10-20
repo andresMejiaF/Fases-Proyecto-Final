@@ -13,22 +13,25 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
-
+/**
+ * Se crean los archivos de testeo para Chat,
+ * Aqui probamos el modelo mediante el archivo sql para
+ *  pruebas (pruebas.sql)
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //contexto de la app
 public class ChatTest {
 
     @Autowired
-    private ChatRepo chatRepo;
+    private ChatRepo chatRepo;//repositorio
     @Autowired
-    private UsuarioRepo usuarioRepo;
+    private UsuarioRepo usuarioRepo;//repositorio auxiliar
 
     @Test
-    @Sql("classpath:pruebas.sql")
-    public void registrarTest(){
+    @Sql("classpath:pruebas.sql")//Archivos .sql
+    public void registrarTest(){//Se crea la entidad para guardarla en el repositorio y verificar el registro
 
         Usuario usuario = usuarioRepo.findById("456").orElse(null);
-       // Administrador administrador = new Administrador("11928", "mejiaAndres", "andress.mejiaf@", "andresM201");
         Chat chat=new Chat("100",usuario );
 
         Chat chatGuardado= chatRepo.save(chat);
@@ -38,7 +41,7 @@ public class ChatTest {
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public void eliminarTest(){
+    public void eliminarTest(){//Se elimina una entidad del repositorio mediante su llave primaria
 
         chatRepo.deleteById("100");
 
@@ -51,7 +54,7 @@ public class ChatTest {
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public  void listarTest(){
+    public  void listarTest(){//Se listan las entidades creadas en pruebas.sql
 
         List<Chat> chats= chatRepo.findAll();
 

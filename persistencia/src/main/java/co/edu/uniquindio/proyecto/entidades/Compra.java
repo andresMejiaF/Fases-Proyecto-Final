@@ -14,6 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+/**
+ * Clase compra, restricciones para atributos y uso de lombok
+ */
 public class Compra implements Serializable {
 
     @Id

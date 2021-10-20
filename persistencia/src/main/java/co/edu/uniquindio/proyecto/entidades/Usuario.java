@@ -6,13 +6,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
+/**
+ * Clase Usuario, restricciones para atributos y uso de lombok
+ * Extiende de Persona por ende llama tambien su ToString
+ */
 public class Usuario extends Persona implements Serializable {
 
     @ElementCollection

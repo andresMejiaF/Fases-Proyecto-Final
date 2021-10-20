@@ -14,6 +14,9 @@ import java.util.Map;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+/**
+ * Clase Producto, restricciones para atributos y uso de lombok
+ */
 public class Producto implements Serializable {
     @Id
     @Column(nullable = false,length = 10)

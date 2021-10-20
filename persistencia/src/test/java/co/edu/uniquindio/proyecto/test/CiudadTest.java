@@ -13,16 +13,20 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
-
+/**
+ * Se crean los archivos de testeo para Ciudad,
+ * Aqui probamos el modelo mediante el archivo sql para
+ *  pruebas (pruebas.sql)
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CiudadTest {
 
     @Autowired
-    private CiudadRepo ciudadRepo;
+    private CiudadRepo ciudadRepo;//repositorio
 
     @Test
-    public void registrarTest(){
+    public void registrarTest(){//Se crea la entidad para guardarla en el repositorio y verificar el registro
 
         Ciudad ciudad = new Ciudad("Manizales",6567);
 
@@ -33,8 +37,8 @@ public class CiudadTest {
 
 
     @Test
-    @Sql("classpath:pruebas.sql")
-    public void eliminarTest(){
+    @Sql("classpath:pruebas.sql")//Archivo sql
+    public void eliminarTest(){//Se elimina una entidad del repositorio mediante su llave primaria
 
         ciudadRepo.deleteById(123);
 
@@ -45,7 +49,7 @@ public class CiudadTest {
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public void actualizarTest(){
+    public void actualizarTest(){//se actualiza una entidad del repositorio
 
         Ciudad guardado = ciudadRepo.findById(123).orElse(null);
         guardado.setNombre("Cali");
@@ -55,7 +59,7 @@ public class CiudadTest {
     }
     @Test
     @Sql("classpath:pruebas.sql")
-    public  void listarTest(){
+    public  void listarTest(){//Se listan las entidades creadas en pruebas.sql
         List<Ciudad> ciudades= ciudadRepo.findAll();
         ciudades.forEach(ciudad -> System.out.println(ciudad));
     }

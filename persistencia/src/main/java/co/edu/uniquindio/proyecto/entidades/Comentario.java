@@ -12,6 +12,11 @@ import java.time.LocalDate;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @ToString
+/**
+    Variadas restricciones para tipos de datos
+    como por ejemplo JoinColumn
+    donde no permitimos que un objeto o llave foranea sea nula
+ */
 public class Comentario implements Serializable {
     @Id
     @Column(nullable = false,length = 10)

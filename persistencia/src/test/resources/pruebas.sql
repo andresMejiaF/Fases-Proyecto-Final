@@ -49,3 +49,6 @@ insert into categoria values ("3672", "Electrodomesticos");
 insert into categoria values ("3462", "Area de juegos");
 insert into categoria values ("3214","Automoviles");
 
+insert into subasta_usuario values("4567","2020/02/29", 500000, "8787", "888" );
+insert into subasta_usuario values("4568","2020/02/27", 600000, "9477", "456" );
+insert into subasta_usuario values("4569","2020/02/22", 300000, "7480", "777" );

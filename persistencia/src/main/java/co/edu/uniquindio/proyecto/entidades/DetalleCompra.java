@@ -12,6 +12,9 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 @AllArgsConstructor
+/**
+ * Clase o entidad Detallecompra, restricciones para atributos y uso de lombok
+ */
 public class DetalleCompra implements Serializable {
     @Id
     @Column(nullable = false,length = 10)

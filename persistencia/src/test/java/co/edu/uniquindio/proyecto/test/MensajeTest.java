@@ -17,20 +17,24 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Se crean los archivos de testeo para Mensaje,
+ * Aqui probamos el modelo mediante el archivo sql para
+ *  pruebas (pruebas.sql)
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class MensajeTest {
 
     @Autowired
-    private MensajeRepo mensajeRepo;
+    private MensajeRepo mensajeRepo;//Repositorio
 
     @Autowired
-    private ChatRepo chatRepo;
+    private ChatRepo chatRepo;//RepoAuxiliar
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public void registrarTest(){
+    public void registrarTest(){  //Se crea la entidad para guardarla en el repositorio y verificar el registro
 
         Chat chat= chatRepo.findById("100").orElse(null);
 
@@ -43,8 +47,8 @@ public class MensajeTest {
     }
 
     @Test
-    @Sql("classpath:pruebas.sql")
-    public void eliminarTest(){
+    @Sql("classpath:pruebas.sql")//archivo.sql
+    public void eliminarTest(){//Se elimina una entidad del repositorio mediante su llave primaria
 
         mensajeRepo.deleteById("999");
 
@@ -55,12 +59,11 @@ public class MensajeTest {
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public void actualizarTest(){
+    public void actualizarTest(){//se actualiza una entidad del repositorio
 
 
         Mensaje guardado = mensajeRepo.findById("999").orElse(null);
 
-        //guardado.setEmail("nuevoEmail@email");
         guardado.setMensaje("estudiaste ?");
 
         //guardo el usuario
@@ -74,7 +77,7 @@ public class MensajeTest {
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public  void listarTest(){
+    public  void listarTest(){ //Se listan las entidades creadas en pruebas.sql
 
         List<Mensaje> mensajes= mensajeRepo.findAll();
 

@@ -12,15 +12,19 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
-
+/**
+ * Se crean los archivos de testeo para administrador,
+ * Aqui probamos el modelo mediante el archivo sql para
+ *  pruebas (pruebas.sql)
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AdministradorTest {
 
     @Autowired
-    private AdministradorRepo administradorRepo;
+    private AdministradorRepo administradorRepo; //Repositorio
     @Test
-    public void regirtrarTest(){
+    public void regirtrarTest(){  //Se crea la entidad para guardarla en el repositorio y verificar el registro
 
         Administrador administrador = new Administrador("11928", "mejiaAndres", "andress.mejiaf@", "andresM201");
 
@@ -30,8 +34,8 @@ public class AdministradorTest {
     }
 
     @Test
-    @Sql("classpath:pruebas.sql")
-    public void eliminarTest(){
+    @Sql("classpath:pruebas.sql")//Archivo sql
+    public void eliminarTest(){ //Se elimina una entidad del repositorio mediante su llave primaria
         administradorRepo.deleteById("119");
         Administrador administradorBuscado = administradorRepo.findById("119").orElse(null);
         Assertions.assertNull(administradorBuscado);
@@ -39,7 +43,7 @@ public class AdministradorTest {
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public void actualizarTest(){
+    public void actualizarTest(){//se actualiza una entidad del repositorio
 
         Administrador guardado = administradorRepo.findById("119").orElse(null);
         guardado.setEmail("nuevoEmail@email");
@@ -50,7 +54,7 @@ public class AdministradorTest {
 
     @Test
     @Sql("classpath:pruebas.sql")
-    public  void listarTest(){
+    public  void listarTest(){//Se listan las entidades creadas en pruebas.sql
         List<Administrador> administradores= administradorRepo.findAll();
         administradores.forEach(administrador -> System.out.println(administrador));
     }

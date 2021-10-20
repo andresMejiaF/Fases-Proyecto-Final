@@ -13,6 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+/**
+ * Clase Subasta, restricciones para atributos y uso de lombok
+ */
 public class Subasta implements Serializable {
     @Id
     @Column(nullable = false,length = 10)
