@@ -9,11 +9,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
+
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 /**
  * Se crean los archivos de testeo para Usuario,
  * Aqui probamos el modelo mediante el archivo sql para
@@ -77,5 +85,35 @@ public class UsuarioTest {
         List<Usuario> usuarios= usuarioRepo.findAll();
 
         usuarios.forEach(usuario -> System.out.println(usuario));
+    }
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public void filtrarNombreTest(){
+       // List <Usuario> lista = usuarioRepo.findAllByNombreContains("santiago Mejia");
+        Optional<Usuario> usuario = usuarioRepo.findAllByEmail("santiago@12");
+
+        // lista.forEach(usuario -> System.out.println(usuario));
+       // lista.forEach( System.out::println);
+        if(usuario.isPresent()){
+            System.out.println(usuario.get());
+
+        }else {
+            System.out.println("eso no existe ole");
+        }
+
+    }
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public void paginarListaTest(){
+        Pageable paginador =  PageRequest.of(0, 2);
+        Page<Usuario> lista = usuarioRepo.findAll(paginador);
+        System.out.println(lista.stream().collect(Collectors.toList()));
+    }
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public void ordenarListaTest(){
+        List<Usuario> lista = usuarioRepo.findAll(Sort.by("nombre"));
+        System.out.println(lista);
     }
 }
