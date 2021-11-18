@@ -24,7 +24,7 @@ insert into mensaje values ("787", "Julian santiago", "2020/10/13", "como esta?"
 insert into mensaje values ("090", "karol Natalia", "2020/10/14", "buenas tarde","300");
 
 
-insert into producto values ("9090", "consola ultimo modelo", 0.10,"2021/10/9","Xbox one",950.000, 30, 123, "777");
+insert into producto values ("9090", "consola ultimo modelo", 0.10,"2021/10/9","Xbox one x",950.000, 30, 123, "777");
 insert into producto values ("22324", "moto ultimo modelo", 0.13,"2021/10/4","yamaha 650",800.000, 2,3312, "888");
 insert into producto values ("4546", "nevera ultimo modelo", 0.30,"2021/12/1","Nevera",550.000, 15, 123, "456");
 
@@ -53,3 +53,6 @@ insert into categoria values ("3214","Automoviles");
 insert into subasta_usuario values("4567","2020/02/29", 500000, "8787", "888" );
 insert into subasta_usuario values("4568","2020/02/27", 600000, "9477", "456" );
 insert into subasta_usuario values("4569","2020/02/22", 300000, "7480", "777" );
+
+
+

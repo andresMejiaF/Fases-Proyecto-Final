@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.dto.ProductoValido;
+import co.edu.uniquindio.proyecto.dto.ProductosPorUsuario;
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
@@ -39,4 +40,32 @@ public interface ProductoRepo extends JpaRepository<Producto, String> {
 
     @Query("select new co.edu.uniquindio.proyecto.dto.ProductoValido( p.nombre, p.descripcion, p.precio, p.ciudad) from Producto p where  :fechaActual < p.fechaLimite")
     List<ProductoValido> listarProductosValidos2(LocalDate fechaActual);
+
+    //Numero de productos que hay por cada tipo de categoria
+    @Query("select c.nombre,  count(p) from  Producto  p join p.categorias c group by c")
+    List<Object[]> obtenerTotalProductosPorCategoria();
+
+    //Que productos no tienen comentarios
+    @Query("select p from Producto p where p.comentarios is empty ")
+    List<Producto> obtenerProductosSinComentarios();
+
+    //filtrar por nombre, busqueda
+    @Query("select p from Producto p where p.nombre like concat('%', :nombre, '%') ")
+    List<Producto> buscarProductoNombre(String nombre);
+
+    //cuantos productosha publicado a la venta cada usuario
+    @Query("select new co.edu.uniquindio.proyecto.dto.ProductosPorUsuario(p.vendedor.codigo, p.vendedor.email, count (p)) from Producto p group by p.vendedor")
+    List<ProductosPorUsuario> obteneProductosEnVenta();
+
+    /*
+    obtener promedio de calificaciones
+    @Query("select avg(c.calificacion) from Producto p join p.comentarios c where p.codigo= :codigo")
+    Float obtenerPromedioCalificaciones(String codigo);
+
+    no se puede hacer porque tenemos pendiente cambiar el tipo de dato de las calificaciones de un producto
+    (String ----> float)
+     */
+
+
+
 }

@@ -38,5 +38,9 @@ public interface UsuarioRepo extends JpaRepository <Usuario, String>{
     @Query("select  u.email,u.nombre, p from Usuario  u left join  u.productos p")
      List<Object[]> listarUsuariosYProductos();
 
+    //Cantidad de usuarios por ciudad
+    @Query("select c.nombre,  count(u) from  Usuario  u join u.ciudad c group by c")
+    List<Object[]> obtenerUsuariosPorCiudad();
+
 }
 

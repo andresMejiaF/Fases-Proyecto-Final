@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.entidades.Compra;
 import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.DetalleCompraRepo;
@@ -70,5 +71,21 @@ public class CompraTest {
         List<Compra> compras= compraRepo.findAll();
         compras.forEach(compra -> System.out.println(compra));
     }
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void listaProductosCompradosTest(){//Se listan las entidades creadas en pruebas.sql
+        List<Producto> productos= compraRepo.obtenerListaProductosComprados("777");
+        productos.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void listaProductosCompradosTest2(){//Se listan las entidades creadas en pruebas.sql
+        Long totalproductos= compraRepo.obtenerListaProductosCompradosU("777");
+       // productos.forEach(System.out::println);
+        System.out.println("El total es: "+totalproductos);
+    }
+
 
 }

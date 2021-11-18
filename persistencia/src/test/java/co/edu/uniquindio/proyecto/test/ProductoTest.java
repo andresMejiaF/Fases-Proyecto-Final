@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.dto.ProductoValido;
+import co.edu.uniquindio.proyecto.dto.ProductosPorUsuario;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.CiudadRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
@@ -127,5 +128,33 @@ public class ProductoTest {
         List<ProductoValido> productos = productoRepo.listarProductosValidos2(LocalDate.now());
         productos.forEach(System.out::println);
     }
+/*
+    @Test
+    @Sql("classpath:pruebas.sql")  solo funciona agregando la intermedia pero eso daña lo otro xd
+    public  void listarProductosCategoriasTest(){//Se listan las entidades creadas en pruebas.sql
+        List<Object[]> respuesta = productoRepo.obtenerTotalProductosPorCategoria();
+        respuesta.forEach(resp -> System.out.println(resp[0]+"---"+resp[1]));
+    }
+  */
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void listarProductosSinCOmentarios(){//Se listan las entidades creadas en pruebas.sql
+        List<Producto> productos = productoRepo.obtenerProductosSinComentarios();
+        productos.forEach(System.out::println);
+    }
 
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void obtenerNombreTest(){//Se listan las entidades creadas en pruebas.sql
+        List<Producto> productos = productoRepo.buscarProductoNombre("one");
+        productos.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void obtenerProductosEnVenta(){//Se listan las entidades creadas en pruebas.sql
+        List<ProductosPorUsuario> productos = productoRepo.obteneProductosEnVenta();
+        productos.forEach(System.out::println);
+    }
 }

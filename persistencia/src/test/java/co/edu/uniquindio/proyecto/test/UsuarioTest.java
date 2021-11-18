@@ -116,4 +116,11 @@ public class UsuarioTest {
         List<Usuario> lista = usuarioRepo.findAll(Sort.by("nombre"));
         System.out.println(lista);
     }
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void listarUsuariosPorCiudadTest(){//Se listan las entidades creadas en pruebas.sql
+        List<Object[]> respuesta = usuarioRepo.obtenerUsuariosPorCiudad();
+        respuesta.forEach(resp -> System.out.println(resp[0]+"---"+resp[1]));
+    }
 }
