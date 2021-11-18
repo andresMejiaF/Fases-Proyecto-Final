@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
+import co.edu.uniquindio.proyecto.dto.ProductoValido;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.CiudadRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 /**
  * Se crean los archivos de testeo para Producto,
@@ -77,6 +79,53 @@ public class ProductoTest {
     public  void listarTest(){//Se listan las entidades creadas en pruebas.sql
         List<Producto> productos= productoRepo.findAll();
         productos.forEach(producto -> System.out.println(producto));
+    }
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void obtenerNombreVendedorTest(){//Se listan las entidades creadas en pruebas.sql
+       String nombre= productoRepo.obtenerNombreVendedor("22324");
+       Assertions.assertEquals("julio jaramillo", nombre);
+    }
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void listarUsuariosProductosTest(){//Se listan las entidades creadas en pruebas.sql
+        List<Object[]> respuesta = usuarioRepo.listarUsuariosYProductos();
+        //respuesta.forEach(System.out::println);
+        for (Object[] objecto: respuesta){
+            System.out.println(objecto[0]+"----"+objecto[1]+"----"+objecto[2]);
+        }
+    }
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void listarProductosYcomentariosTest(){//Se listan las entidades creadas en pruebas.sql
+        List<Object[]> respuesta = productoRepo.listarProductosYComentarios();
+        //respuesta.forEach(System.out::println);
+       respuesta.forEach(object -> System.out.println(object[0]+"---"+object[1]));
+        //Falta lo del Assertions con el .size xd
+    }
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void listarUsuariosComentariosTest(){//Se listan las entidades creadas en pruebas.sql
+        List<Usuario> usuarios = productoRepo.listarUsuariosComentarios("9090");
+        usuarios.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void listarProductosValidosTest(){//Se listan las entidades creadas en pruebas.sql
+        List<Object[]> productos = productoRepo.listarProductosValidos(LocalDate.now());
+        productos.forEach(object -> System.out.println(object[0]+"---"+object[1]+"---"+object[2]+"----"+object[3]));
+    }
+    //Solucion con dto
+    @Test
+    @Sql("classpath:pruebas.sql")
+    public  void listarProductosValidosTest2(){//Se listan las entidades creadas en pruebas.sql
+        List<ProductoValido> productos = productoRepo.listarProductosValidos2(LocalDate.now());
+        productos.forEach(System.out::println);
     }
 
 }

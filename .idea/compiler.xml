@@ -11,6 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Fases-Proyecto-Final" target="11" />
       <module name="persistencia" target="11" />
       <module name="proyecto-asignatura" target="11" />
     </bytecodeTargetLevel>
