@@ -8,16 +8,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="persistencia" />
+        <module name="negocio" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Fases-Proyecto-Final" target="11" />
+      <module name="negocio" target="11" />
       <module name="persistencia" target="11" />
       <module name="proyecto-asignatura" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="negocio" options="-parameters" />
       <module name="persistencia" options="-parameters" />
     </option>
   </component>

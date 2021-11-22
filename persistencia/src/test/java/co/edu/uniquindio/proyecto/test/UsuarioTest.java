@@ -44,7 +44,7 @@ public class UsuarioTest {
         Map<String, String> telefonos= new HashMap<>();
         telefonos.put("Casa", "3104327744");
         telefonos.put("Celular", "3214161");
-        Usuario usuario= new Usuario("123", "Andres mejia", "Andress@email", "mejia01", telefonos, ciudad);
+        Usuario usuario= new Usuario("123", "Andres mejia", "Andress@email", "mejia01", telefonos, ciudad, "Direwolf");
         Usuario usuarioGuardado= usuarioRepo.save(usuario);
         System.out.println(usuarioGuardado);
         Assertions.assertNotNull(usuarioGuardado);

@@ -57,14 +57,14 @@ public interface ProductoRepo extends JpaRepository<Producto, String> {
     @Query("select new co.edu.uniquindio.proyecto.dto.ProductosPorUsuario(p.vendedor.codigo, p.vendedor.email, count (p)) from Producto p group by p.vendedor")
     List<ProductosPorUsuario> obteneProductosEnVenta();
 
-    /*
-    obtener promedio de calificaciones
+
+    //obtener promedio de calificaciones
     @Query("select avg(c.calificacion) from Producto p join p.comentarios c where p.codigo= :codigo")
     Float obtenerPromedioCalificaciones(String codigo);
 
-    no se puede hacer porque tenemos pendiente cambiar el tipo de dato de las calificaciones de un producto
-    (String ----> float)
-     */
+
+
+
 
 
 

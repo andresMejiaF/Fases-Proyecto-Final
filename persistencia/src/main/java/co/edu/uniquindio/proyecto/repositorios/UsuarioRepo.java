@@ -30,11 +30,15 @@ public interface UsuarioRepo extends JpaRepository <Usuario, String>{
     */
     Optional<Usuario> findByEmailAndPassword(String email, String clave);
 
+    Optional<Usuario> findByEmail(String email);
+
+    Optional<Usuario> findByUsername(String username);
+
     Page<Usuario> findAll(Pageable paginador);
-    /*
-    @Query ("select p from Usuario u, IN (u.productos) p where u.email = : email")
+    //Corregir para que liste los favoritos ( es que hay dos)
+    @Query ("select p from Usuario u, IN (u.productosFavoritos) p where u.email = : email")
     List <Producto> obtenerProductoFavoritos(String email);
-    */
+
     @Query("select  u.email,u.nombre, p from Usuario  u left join  u.productos p")
      List<Object[]> listarUsuariosYProductos();
 
