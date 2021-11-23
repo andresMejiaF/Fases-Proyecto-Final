@@ -19,14 +19,14 @@ import java.time.LocalDate;
  */
 public class Comentario implements Serializable {
     @Id
-    @Column(nullable = false,length = 10)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private String codigo;
+    private Integer codigo;
 
     @Column(nullable = false)
     private String mensaje;
 
-    @Column(nullable = false)
+    @Column(length = 1000)
     private String respuesta;
 
     @Column(nullable = false)

@@ -84,4 +84,11 @@ import java.util.Optional;
         }
         return buscado.get();
     }
+
+    @Override
+    public Usuario iniciarSesion(String email, String password) throws Exception {
+
+        return usuarioRepo.findByEmailAndPassword(email, password).orElseThrow(() -> new Exception("Los datos de autenticacion son incorrectos"));
+
+    }
 }

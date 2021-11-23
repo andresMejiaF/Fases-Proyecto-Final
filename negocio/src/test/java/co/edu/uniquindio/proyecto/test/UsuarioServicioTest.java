@@ -59,7 +59,7 @@ public class UsuarioServicioTest {
 
         list.forEach(System.out::println);
     }
-    
+
     @Test
     public  void  actualizarTest(){
         try {
@@ -70,6 +70,18 @@ public class UsuarioServicioTest {
             Assertions.assertEquals("nuevaContraseña", modificado.getPassword());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public  void  loginTest() {
+
+        try {
+            Usuario usuario =usuarioServicio.iniciarSesion("prueba2@Gmail", "password123");
+            Assertions.assertNotNull(usuario);
+        } catch (Exception e) {
+            Assertions.assertTrue(false, e.getMessage());
         }
 
     }

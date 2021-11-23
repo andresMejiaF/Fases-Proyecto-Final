@@ -13,7 +13,7 @@ import java.util.List;
  * con su Entidad y tipo de dato de su llave primaria
  */
 @Repository
-public interface ComentarioRepo extends JpaRepository<Comentario, String> {
+public interface ComentarioRepo extends JpaRepository<Comentario, Integer> {
     /*
     @Query("select c from  Comentario c  where c.calificacion> :calificacionMenor and c.calificacion <: calificacionMayor")
     List<Comentario> listarComentarios(int calificacionMenor, int calificacionMayor);

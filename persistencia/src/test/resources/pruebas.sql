@@ -32,10 +32,10 @@ insert into subasta values ("8787",  "2000/11/12", "9090");
 insert into subasta values ("9477",  "2021/09/22", "22324");
 insert into subasta values ("7480", "2021/08/19", "4546");
 
-insert into comentario values ("934",12,"2021/04/29","Buen producto", "Producto bien calificado", "9090", "456");
-insert into comentario values ("936",10,"2021/04/29","Mal producto", "Producto mal calificado", "22324", "777");
-insert into comentario values ("937",12,"2021/04/29","Perfecto funcionamiento", "Producto bien calificado", "9090", "888");
-insert into comentario values ("939",12,"2021/04/29","ya no me gusto ", "0", "9090", "456");
+insert into comentario values (934,12,"2021/04/29","Buen producto", "Producto bien calificado", "9090", "456");
+insert into comentario values (936,10,"2021/04/29","Mal producto", "Producto mal calificado", "22324", "777");
+insert into comentario values (937,12,"2021/04/29","Perfecto funcionamiento", "Producto bien calificado", "9090", "888");
+insert into comentario values (939,12,"2021/04/29","ya no me gusto ", "0", "9090", "456");
 
 insert into compra values ("020", "2021/11/19", "tarjeta debito", "456");
 insert into compra values ("021", "2020/02/29", "tarjeta credito", "777");

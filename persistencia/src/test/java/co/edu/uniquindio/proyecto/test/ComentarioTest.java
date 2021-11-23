@@ -37,7 +37,7 @@ public class ComentarioTest {
         Producto producto=productoRepo.findById("9090").orElse(null);
         Usuario usuario=usuarioRepo.findById("456").orElse(null);
 
-        Comentario comentario=new Comentario("1234", "Buen producto", "Gracias", LocalDate.now(), 3.0, usuario, producto);
+        Comentario comentario=new Comentario(1, "Buen producto", "Gracias", LocalDate.now(), 3.0, usuario, producto);
         Comentario comentarioGuardado= comentarioRepo.save(comentario);
         System.out.println(comentarioGuardado);
         Assertions.assertNotNull(comentarioGuardado);
@@ -46,8 +46,8 @@ public class ComentarioTest {
     @Test
     @Sql("classpath:pruebas.sql")//Archivo.sql
     public void eliminarTest(){//Se elimina una entidad del repositorio mediante su llave primaria
-        comentarioRepo.deleteById("934");
-        Comentario comentarioBuscado = comentarioRepo.findById("934").orElse(null);
+        comentarioRepo.deleteById(934);
+        Comentario comentarioBuscado = comentarioRepo.findById(934).orElse(null);
         Assertions.assertNull(comentarioBuscado);
     }
 
@@ -55,11 +55,11 @@ public class ComentarioTest {
     @Sql("classpath:pruebas.sql")
     public void actualizarTest(){//se actualiza una entidad del repositorio
 
-        Comentario comentario = comentarioRepo.findById("934").orElse(null);
-        Comentario guardado = comentarioRepo.findById("934").orElse(null);
+        Comentario comentario = comentarioRepo.findById(934).orElse(null);
+        Comentario guardado = comentarioRepo.findById(934).orElse(null);
         guardado.setRespuesta("Maravilloso");
         comentarioRepo.save(guardado);
-        Comentario comentarioBuscado= comentarioRepo.findById("934").orElse(null);
+        Comentario comentarioBuscado= comentarioRepo.findById(934).orElse(null);
         Assertions.assertEquals("Maravilloso", comentarioBuscado.getRespuesta());
     }
 
