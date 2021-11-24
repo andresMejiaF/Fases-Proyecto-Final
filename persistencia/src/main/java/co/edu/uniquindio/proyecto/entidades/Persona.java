@@ -31,7 +31,7 @@ public class Persona implements Serializable {
     @Length(max= 150)
     private String nombre;
     @Column(nullable = false, length = 150, unique = true)
-    @Email
+    @Email(message = "Escribe un email valido")
     private String email;
     @Column(nullable = false, length = 100)
     private String password;
