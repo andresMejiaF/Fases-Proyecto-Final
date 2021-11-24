@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
+<h:head>
+    <meta http-equiv= "Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name= "viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Crear nuevo producto</title>
+</h:head>
+<h:body>
+    <p:panel header="Publicar Producto" >
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel for="codigo_producto" value="Codigo:" />
+                <p:inputText id="codigo_producto" value="#{productoBean.producto.codigo}" required="true"/>
+
+                <p:outputLabel for="nombre_producto" value="Nombre:" />
+                <p:inputText id="nombre_producto" value="#{productoBean.producto.nombre}" required="true"/>
+
+                <p:outputLabel for="descripcion_producto" value="Descripcion:" />
+                <p:textEditor id="descripcion_producto" value="#{productoBean.producto.descripcion}" height="300" secure="false" />
+
+                <p:outputLabel for="precio_producto" value="Precio:" />
+                <p:inputText id="precio_producto" value="#{productoBean.producto.precio}" required="true" type="number" />
+
+                <p:outputLabel for="descuento_producto" value="Descuento:" />
+                <p:inputText id="descuento_producto" value="#{productoBean.producto.descuento}" required="true" type="number" />
+
+                <p:outputLabel for="unidades_producto" value="Unidades:" />
+                <p:inputText id="unidades_producto" value="#{productoBean.producto.unidades}" required="true" type="number"/>
+
+                <p:outputLabel for="fecha_producto" value="Fecha Limite:" />
+                <p:datePicker id="fecha_producto" value="#{productoBean.producto.fechaLimite}" required="true"  />
+
+
+            </h:panelGrid>
+            <p:growl showDetail="true" />
+            <p:commandButton value="Crear Producto" action="#{productoBean.crearProducto}" update="@form" icon="pi pi-desktop"/>
+        </h:form>
+    </p:panel>
+</h:body>
+</html>
