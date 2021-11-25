@@ -37,7 +37,8 @@
                 <p:outputLabel for="fecha_producto" value="Fecha Limite:" />
                 <p:datePicker id="fecha_producto" value="#{productoBean.producto.fechaLimite}" required="true"  />
 
-
+                <p:outputLabel for="imagenes_producto" value="Imágenes:" />
+                <p:fileUpload id="imagenes_producto" listener="#{productoBean.subirImagenes}" mode="advanced" multiple="true" sizeLimit="1000000" fileLimit="5"  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
             </h:panelGrid>
             <p:growl showDetail="true" />
             <p:commandButton value="Crear Producto" action="#{productoBean.crearProducto}" update="@form" icon="pi pi-desktop"/>

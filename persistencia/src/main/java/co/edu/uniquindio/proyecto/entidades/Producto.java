@@ -70,6 +70,6 @@ public class Producto implements Serializable {
     private List<Categoria> categorias;
 
     @ElementCollection
-    @Column(nullable = false)
-    private Map<String, String> imagen;
+    private List<String> imagenes;
+
 }
