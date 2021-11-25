@@ -31,6 +31,13 @@
                 <p:outputLabel for="username_usuario" value="Username:" />
                 <p:inputText id="username_usuario" value="#{usuarioBean.usuario.username}" required="true" />
 
+                <p:outputLabel for="ciudad_usuario" value="Ciudad: " />
+                <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudad}" required="true" requiredMessage="La ciudad es obligatoria" converter="#{ciudadConverter}" >
+                   <f:selectItem itemLabel="Seleccione una Ciudad " noSelectionOption="true"/>
+                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"
+                                   value="#{usuarioBean.ciudades}" />
+                </p:selectOneMenu>
+
             </h:panelGrid>
             <p:growl showDetail="true" />
             <p:commandButton value="Registrar Usuario" action="#{usuarioBean.registrarUsuario}" update="@form" icon="pi pi-user"/>
