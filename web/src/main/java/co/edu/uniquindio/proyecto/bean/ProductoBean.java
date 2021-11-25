@@ -1,7 +1,10 @@
 package co.edu.uniquindio.proyecto.bean;
 
+import co.edu.uniquindio.proyecto.entidades.Categoria;
+import co.edu.uniquindio.proyecto.entidades.Ciudad;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
@@ -18,7 +21,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @ViewScoped
@@ -27,19 +32,31 @@ public class ProductoBean implements Serializable {
     private Producto producto;
 
     @Autowired
+    private CiudadServicio ciudadServicio;
+    @Autowired
     private ProductoServicio productoServicio;
     @Autowired
     private UsuarioServicio usuarioServicio;
 
     private ArrayList<String> imagenes;
 
+    @Getter @Setter
+    private List<Categoria> categorias;
+
     @Value("${upload.url}")
     private String urlUploads;
+
+    @Getter @Setter
+    private Ciudad ciudad;
+    @Getter @Setter
+    private List<Ciudad> ciudades;
 
     @PostConstruct
     public void inicializar(){
         this.producto= new Producto();
         this.imagenes= new ArrayList<>();
+        categorias= productoServicio.listarCategorias();
+        ciudades= ciudadServicio.listarCiudades();
     }
 
     public  void crearProducto(){
@@ -49,8 +66,9 @@ public class ProductoBean implements Serializable {
            if(!imagenes.isEmpty()) {
                Usuario usuario = usuarioServicio.obtenerUsuario("94285");
                producto.setVendedor(usuario);
-               productoServicio.publicarProducto(producto);
                producto.setImagenes(imagenes);
+               producto.setFechaLimite(LocalDate.now().plusMonths(2));
+               productoServicio.publicarProducto(producto);
                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto Publicado!");
                FacesContext.getCurrentInstance().addMessage(null, msg);
            }else{

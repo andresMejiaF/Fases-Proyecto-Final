@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.entidades.Compra;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.excepciones.ProductoNoEncontradoException;
+import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class ProductoServicioImpl implements ProductoServicio{
 
     @Autowired
     private ProductoRepo productoRepo;
+    @Autowired
+    private CategoriaRepo categoriaRepo;
     @Override
     public Producto publicarProducto(Producto producto) throws Exception {
         try {
@@ -79,5 +82,15 @@ public class ProductoServicioImpl implements ProductoServicio{
     @Override
     public List<Producto> listarProductos(String codigoUsuario) throws Exception {
         return null;
+    }
+
+    @Override
+    public List<Categoria> listarCategorias() {
+        return categoriaRepo.findAll();
+    }
+
+    @Override
+    public Categoria obtenerCategoria(String codigo) throws Exception {
+        return categoriaRepo.findById(codigo).orElseThrow(()-> new Exception("El codigo no corresponde a ninguna categoria"));
     }
 }

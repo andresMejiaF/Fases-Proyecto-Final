@@ -42,6 +42,7 @@ public interface ProductoRepo extends JpaRepository<Producto, String> {
     List<ProductoValido> listarProductosValidos2(LocalDate fechaActual);
 
     //Numero de productos que hay por cada tipo de categoria
+
     @Query("select c.nombre,  count(p) from  Producto  p join p.categorias c group by c")
     List<Object[]> obtenerTotalProductosPorCategoria();
 

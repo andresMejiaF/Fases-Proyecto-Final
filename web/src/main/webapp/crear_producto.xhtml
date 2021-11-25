@@ -22,9 +22,6 @@
                 <p:outputLabel for="nombre_producto" value="Nombre:" />
                 <p:inputText id="nombre_producto" value="#{productoBean.producto.nombre}" required="true"/>
 
-                <p:outputLabel for="descripcion_producto" value="Descripcion:" />
-                <p:textEditor id="descripcion_producto" value="#{productoBean.producto.descripcion}" height="300" secure="false" />
-
                 <p:outputLabel for="precio_producto" value="Precio:" />
                 <p:inputText id="precio_producto" value="#{productoBean.producto.precio}" required="true" type="number" />
 
@@ -34,11 +31,25 @@
                 <p:outputLabel for="unidades_producto" value="Unidades:" />
                 <p:inputText id="unidades_producto" value="#{productoBean.producto.unidades}" required="true" type="number"/>
 
-                <p:outputLabel for="fecha_producto" value="Fecha Limite:" />
-                <p:datePicker id="fecha_producto" value="#{productoBean.producto.fechaLimite}" required="true"  />
+
+
+                <p:outputLabel for="categorias_p" value="Categorias:" />
+                <p:selectManyMenu id="categorias_p" value="#{productoBean.producto.categorias}" showCheckbox="true" required="true" converter="#{categoriaConverter}">
+                    <f:selectItems value="#{productoBean.categorias}" var="categoria" itemLabel="#{categoria.nombre}"/>
+                </p:selectManyMenu>
+
+                <p:outputLabel for="ciudad_p" value="Ciudad:" />
+                <p:selectOneMenu id="ciudad_p" value="#{productoBean.producto.ciudad}" required="true" requiredMessage="La ciudad es obligatoria" converter="#{ciudadConverter}" >
+                    <f:selectItem itemLabel="Seleccione una Ciudad " noSelectionOption="true"/>
+                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"  value="#{productoBean.ciudades}" />
+                </p:selectOneMenu>
 
                 <p:outputLabel for="imagenes_producto" value="Imágenes:" />
                 <p:fileUpload id="imagenes_producto" listener="#{productoBean.subirImagenes}" mode="advanced" multiple="true" sizeLimit="1000000" fileLimit="5"  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+
+                <p:outputLabel for="descripcion_producto" value="Descripcion:" />
+                <p:textEditor id="descripcion_producto" value="#{productoBean.producto.descripcion}" height="300" secure="false" />
+
             </h:panelGrid>
             <p:growl showDetail="true" />
             <p:commandButton value="Crear Producto" action="#{productoBean.crearProducto}" update="@form" icon="pi pi-desktop"/>

@@ -29,4 +29,8 @@ public interface ProductoServicio {
 
     List<Producto> listarProductos(String codigoUsuario)throws Exception;
 
+    List<Categoria> listarCategorias();
+
+    Categoria obtenerCategoria(String codigo) throws Exception;
+
 }
