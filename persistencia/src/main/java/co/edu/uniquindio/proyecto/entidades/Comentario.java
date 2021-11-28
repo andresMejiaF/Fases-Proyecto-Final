@@ -2,6 +2,8 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -24,6 +26,7 @@ public class Comentario implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
+    @NotBlank
     private String mensaje;
 
     @Column(length = 1000)
@@ -33,6 +36,7 @@ public class Comentario implements Serializable {
     private LocalDate fechaComentario;
 
     @Column(nullable = false)
+    @PositiveOrZero
     private Integer calificacion;
 
     @JoinColumn(nullable = false)

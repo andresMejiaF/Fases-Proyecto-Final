@@ -70,14 +70,14 @@ public class ProductoBean implements Serializable {
                producto.setFechaLimite(LocalDate.now().plusMonths(2));
                productoServicio.publicarProducto(producto);
                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto Publicado!");
-               FacesContext.getCurrentInstance().addMessage(null, msg);
+               FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
            }else{
                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta", "Es necesario que subas almenos una imagen del producto");
-               FacesContext.getCurrentInstance().addMessage(null, msg);
+               FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
            }
         } catch (Exception e) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, fm);
+            FacesContext.getCurrentInstance().addMessage("msj-bean", fm);
 
         }
 

@@ -44,6 +44,8 @@ public class Producto implements Serializable {
     @Future
     @Column(nullable = false)
     private LocalDate fechaLimite;
+
+    @PositiveOrZero
     @Column(nullable = false)
     private double descuento;
 
@@ -61,7 +63,6 @@ public class Producto implements Serializable {
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude
     private List<DetalleCompra> detalleCompras;
-    //@JoinColumn(nullable = false)
     @ManyToOne
     private Ciudad ciudad;
 
