@@ -51,7 +51,7 @@ public class ProductoServicioImpl implements ProductoServicio{
 
     @Override
     public List<Producto> listarProducto(Categoria categoria) {
-        return null;
+        return productoRepo.listarPorCategoria(categoria);
     }
 
     @Override
@@ -92,5 +92,10 @@ public class ProductoServicioImpl implements ProductoServicio{
     @Override
     public Categoria obtenerCategoria(String codigo) throws Exception {
         return categoriaRepo.findById(codigo).orElseThrow(()-> new Exception("El codigo no corresponde a ninguna categoria"));
+    }
+
+    @Override
+    public List<Producto> listarTodosLosProductos() {
+        return productoRepo.findAll();
     }
 }

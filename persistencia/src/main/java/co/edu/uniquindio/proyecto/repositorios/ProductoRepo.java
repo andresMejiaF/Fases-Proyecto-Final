@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.dto.ProductoValido;
 import co.edu.uniquindio.proyecto.dto.ProductosPorUsuario;
+import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
@@ -21,6 +22,11 @@ import java.util.List;
 public interface ProductoRepo extends JpaRepository<Producto, String> {
 
     Page<Producto> findAll(Pageable paginador);
+
+    //Listar Por Categorias
+    @Query("Select p from Producto p where  :categoria member of p.categorias")
+    List<Producto> listarPorCategoria(Categoria categoria);
+
     @Query("select p.vendedor.nombre from Producto p where  p.codigo=:id")
     String obtenerNombreVendedor(String id);
 

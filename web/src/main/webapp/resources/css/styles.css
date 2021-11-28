@@ -2,3 +2,13 @@
     font-size: 1.5rem;
 
 }
+
+.imagen-producto{
+    max-width: 150px;
+}
+
+.item-pro{
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
