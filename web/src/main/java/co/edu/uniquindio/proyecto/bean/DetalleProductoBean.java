@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.bean;
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
+import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -32,16 +34,30 @@ public class DetalleProductoBean implements Serializable {
     @Getter@Setter
     private List<Comentario> comentarios;
 
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
     @PostConstruct
     public void inicializar(){
-        this.nuevoComentario= new Comentario();
+        nuevoComentario= new Comentario();
         if(codigoProducto!=null && !codigoProducto.isEmpty()){
             producto = productoServicio.obtenerProducto(codigoProducto);
+            this.comentarios= producto.getComentarios();
         }
     }
 
     public void crearComentario(){
 
+        try {
+            nuevoComentario.setProducto(producto);
+            nuevoComentario.setUsuario(usuarioServicio.obtenerUsuario("94285"));
+            productoServicio.comentarProducto(nuevoComentario);
+            this.comentarios.add(nuevoComentario);
+            nuevoComentario= new Comentario();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

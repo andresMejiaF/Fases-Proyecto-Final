@@ -33,7 +33,7 @@ public class Comentario implements Serializable {
     private LocalDate fechaComentario;
 
     @Column(nullable = false)
-    private Double calificacion;
+    private Integer calificacion;
 
     @JoinColumn(nullable = false)
     @ManyToOne

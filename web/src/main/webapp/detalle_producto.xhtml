@@ -21,8 +21,9 @@
         <p>#{detalleProductoBean.producto}</p>
 
         <p:panel header="Comentarios">
-            <p:dataList id="lista-c" value="#{detalleProductoBean.comentarios}" emptyMessage="No hay comentarios">
-
+            <p:dataList id="lista-c" value="#{detalleProductoBean.comentarios}" var="comentario" emptyMessage="No hay comentarios">
+                <p>#{comentario.mensaje} - #{comentario.usuario.nombre}</p>
+                <p:rating value="#{comentario.calificacion}" readonly="true" />
             </p:dataList>
         </p:panel>
 

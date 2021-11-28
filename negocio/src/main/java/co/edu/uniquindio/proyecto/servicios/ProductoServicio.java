@@ -17,7 +17,7 @@ public interface ProductoServicio {
 
     List<Producto> listarProducto(Categoria categoria);
 
-    void comentarProducto(String mensaje, double calificacion, Usuario usuario, Producto producto) throws Exception;
+    void comentarProducto(Comentario comentario) throws Exception;
 
     void guardarProductoEnFavoritos(Producto producto, Usuario usuario)throws Exception;
 

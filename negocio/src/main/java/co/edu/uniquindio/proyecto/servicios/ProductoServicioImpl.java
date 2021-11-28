@@ -1,15 +1,14 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.Categoria;
-import co.edu.uniquindio.proyecto.entidades.Compra;
-import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ProductoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
+import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +19,8 @@ public class ProductoServicioImpl implements ProductoServicio{
     private ProductoRepo productoRepo;
     @Autowired
     private CategoriaRepo categoriaRepo;
+    @Autowired
+    private  ComentarioRepo comentarioRepo;
     @Override
     public Producto publicarProducto(Producto producto) throws Exception {
         try {
@@ -55,8 +56,9 @@ public class ProductoServicioImpl implements ProductoServicio{
     }
 
     @Override
-    public void comentarProducto(String mensaje, double calificacion, Usuario usuario, Producto producto) throws Exception {
-
+    public void comentarProducto(Comentario comentario) throws Exception {
+        comentario.setFechaComentario(LocalDate.now());
+        comentarioRepo.save(comentario);
     }
 
     @Override
