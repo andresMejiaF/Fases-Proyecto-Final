@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
@@ -46,4 +47,8 @@ public class Comentario implements Serializable {
     @JoinColumn(nullable = false)
     @ManyToOne
     private Producto producto;
+
+    public String getFechaEstilo(){
+        return fechaComentario.format(DateTimeFormatter.ISO_DATE);
+    }
 }

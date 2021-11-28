@@ -6,7 +6,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+>
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -20,25 +22,36 @@
 
         <p>#{detalleProductoBean.producto}</p>
 
-        <p:panel header="Comentarios">
-            <p:dataList id="lista-c" value="#{detalleProductoBean.comentarios}" var="comentario" emptyMessage="No hay comentarios">
-                <p>#{comentario.mensaje} - #{comentario.usuario.nombre}</p>
-                <p:rating value="#{comentario.calificacion}" readonly="true" />
-            </p:dataList>
+        
+
+        <p:panel header="Comentarios" styleClass="mt-3">
+            <div class="blog-comment">
+                <ul class="comments" >
+                    <p:dataList id="lista-com" value="#{detalleProductoBean.comentarios}" var="comentario" emptyMessage="No hay comentarios" type="definition">
+                        <li class="clearfix">
+                            <img src="/uploads/avatar.png" class="avatar" alt="" />
+                            <div class="post-comments">
+                                <p class="meta">#{comentario.fechaEstilo} <a href="#">#{comentario.usuario.nombre}</a> dijo: <i class="pull-right" style="visibility: hidden"><a href="#"><small>Reply</small></a></i></p>
+                                <p>#{comentario.mensaje}</p>
+                                <p:rating readonly="true" value="#{comentario.calificacion}" />
+                            </div>
+
+                            <ul class="comments" jsf:rendered="#{comentario.respuesta != null}">
+                                <li class="clearfix">
+                                    <img src="/uploads/avatar.png" class="avatar" alt="" />
+                                    <div class="post-comments">
+                                        <p class="meta">#{comentario.fechaEstilo} <a href="#">#{comentario.producto.vendedor.nombre}</a> dijo: </p>
+                                        <p>#{comentario.respuesta}</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </p:dataList>
+                </ul>
+            </div>
         </p:panel>
 
-        <p:panel header="Hacer un comentario" styleClass="mt-3" >
-            <h:form id="crear-comentario">
-                <h:panelGrid columns="2" cellpadding="3">
-                    <p:inputTextarea value="#{detalleProductoBean.nuevoComentario.mensaje}"
-                                     required="true" styleClass="comentario-usuario" />
-
-                    <p:rating required="true" value="#{detalleProductoBean.nuevoComentario.calificacion}"/>
-                </h:panelGrid>
-                <p:commandButton value="Comentar" icon="pi pi-comment" iconPos="left" update="@form,lista-c" styleClass="mt-4" action="#{detalleProductoBean.crearComentario}" />
-                <p:growl for="msj-pregunta" showDetail="true" />
-            </h:form>
-        </p:panel>
 
     </div>
 
