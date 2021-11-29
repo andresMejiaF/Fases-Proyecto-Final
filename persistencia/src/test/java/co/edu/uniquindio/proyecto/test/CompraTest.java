@@ -34,7 +34,7 @@ public class CompraTest {
     @Sql("classpath:pruebas.sql")
     public void registrarTest(){//Se crea la entidad para guardarla en el repositorio y verificar el registro
         Usuario usuario=usuarioRepo.findById("456").orElse(null);
-        Compra compra = new Compra("235", LocalDate.now(), "Efectivo", usuario);
+        Compra compra = new Compra( LocalDate.now(), "Efectivo", usuario);
 
         Compra compraGuardado= compraRepo.save(compra);
         System.out.println(compraGuardado);

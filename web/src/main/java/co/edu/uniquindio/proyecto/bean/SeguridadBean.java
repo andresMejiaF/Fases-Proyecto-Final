@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +37,9 @@ public class SeguridadBean implements Serializable {
     private ArrayList<ProductoCarrito> productosCarrito;
     @Getter @Setter
     private double subTotal;
+
+    @Autowired
+    private ProductoServicio productoServicio;
 
     @PostConstruct
     public  void inicializar(){
@@ -90,6 +94,17 @@ public class SeguridadBean implements Serializable {
     }
 
     public void comprar(){
-
+        if(usuarioSesion!=null && !productosCarrito.isEmpty()) {
+            try {
+                productoServicio.comprarProductos(usuarioSesion, productosCarrito, "PSE");
+                productosCarrito.clear();
+                subTotal=0F;
+                FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada corrctamente");
+                FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
+            } catch (Exception e) {
+                FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+                FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
+            }
+        }
     }
 }

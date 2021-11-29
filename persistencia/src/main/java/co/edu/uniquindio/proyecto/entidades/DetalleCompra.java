@@ -12,15 +12,15 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-@AllArgsConstructor
+
 /**
  * Clase o entidad Detallecompra, restricciones para atributos y uso de lombok
  */
 public class DetalleCompra implements Serializable {
     @Id
-    @Column(nullable = false,length = 10)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private String codigo;
+    private Integer codigo;
     @Column(nullable = false)
     @Positive
     private Integer unidades;
@@ -34,4 +34,11 @@ public class DetalleCompra implements Serializable {
     @JoinColumn(nullable = false)
     @ManyToOne
     private Compra compra;
+
+    public DetalleCompra(Integer unidades, double precioProducto, Producto producto, Compra compra){
+        this.unidades=unidades;
+        this.precioProducto=precioProducto;
+        this.producto=producto;
+        this.compra=compra;
+    }
 }

@@ -40,7 +40,7 @@ public class DetalleCompraTest {
 
             Compra compra= compraRepo.findById("020").orElse(null);
             Producto producto= productoRepo.findById("9090").orElse(null);
-            DetalleCompra detalleCompra = new DetalleCompra("372", 89, 50.00,  producto, compra);
+            DetalleCompra detalleCompra = new DetalleCompra( 89, 50.00,  producto, compra);
 
             DetalleCompra detallecompraGuardado= detalleCompraRepo.save(detalleCompra);
             System.out.println(detallecompraGuardado);

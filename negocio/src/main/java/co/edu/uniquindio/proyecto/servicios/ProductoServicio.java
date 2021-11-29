@@ -37,6 +37,6 @@ public interface ProductoServicio {
 
     List<Producto> listarTodosLosProductos();
 
-    Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, );
+    Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, String medioPago )throws Exception;
 
 }

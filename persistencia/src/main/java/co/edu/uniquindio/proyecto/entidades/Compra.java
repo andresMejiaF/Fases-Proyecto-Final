@@ -20,9 +20,9 @@ import java.util.List;
 public class Compra implements Serializable {
 
     @Id
-    @Column(nullable = false,length = 10)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private String codigo;
+    private Integer codigo;
     @Column(nullable = false)
     private LocalDate fechaCompra;
     @Column(nullable = false)
@@ -35,8 +35,7 @@ public class Compra implements Serializable {
     @ToString.Exclude
     private List<DetalleCompra> detalleCompras;
 
-    public Compra(String codigo, LocalDate fechaCompra, String medioPago, Usuario usuario) {
-        this.codigo = codigo;
+    public Compra( LocalDate fechaCompra, String medioPago, Usuario usuario) {
         this.fechaCompra=fechaCompra;
         this.medioPago=medioPago;
         this.usuario=usuario;

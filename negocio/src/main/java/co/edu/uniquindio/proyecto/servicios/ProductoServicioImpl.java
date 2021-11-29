@@ -1,31 +1,37 @@
 package co.edu.uniquindio.proyecto.servicios;
 
+import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ProductoNoEncontradoException;
-import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
-import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
-import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
+import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductoServicioImpl implements ProductoServicio{
+public class ProductoServicioImpl implements ProductoServicio {
 
     @Autowired
     private ProductoRepo productoRepo;
     @Autowired
+    private DetalleCompraRepo detalleCompraRepo;
+    @Autowired
     private CategoriaRepo categoriaRepo;
     @Autowired
-    private  ComentarioRepo comentarioRepo;
+    private ComentarioRepo comentarioRepo;
+    @Autowired
+    private CompraRepo compraRepo;
+
     @Override
     public Producto publicarProducto(Producto producto) throws Exception {
         try {
             return productoRepo.save(producto);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
@@ -38,7 +44,7 @@ public class ProductoServicioImpl implements ProductoServicio{
     @Override
     public void eliminarProducto(String codigo) throws Exception {
         Optional<Producto> producto = productoRepo.findById(codigo);
-        if (producto.isEmpty()){
+        if (producto.isEmpty()) {
             throw new Exception("El codigo del producto no existe");
         }
 
@@ -93,11 +99,40 @@ public class ProductoServicioImpl implements ProductoServicio{
 
     @Override
     public Categoria obtenerCategoria(String codigo) throws Exception {
-        return categoriaRepo.findById(codigo).orElseThrow(()-> new Exception("El codigo no corresponde a ninguna categoria"));
+        return categoriaRepo.findById(codigo).orElseThrow(() -> new Exception("El codigo no corresponde a ninguna categoria"));
     }
 
     @Override
     public List<Producto> listarTodosLosProductos() {
         return productoRepo.findAll();
     }
+
+    @Override
+    public Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, String medioPago) throws Exception {
+       try {
+           Compra compra = new Compra();
+           compra.setFechaCompra(LocalDate.now(ZoneId.of("America/Bogota")));
+           compra.setUsuario(usuario);
+           compra.setMedioPago(medioPago);
+
+           Compra compraGuardada = compraRepo.save(compra);
+
+           DetalleCompra dc;
+           for (ProductoCarrito p : productos) {
+               dc = new DetalleCompra();
+               dc.setCompra(compraGuardada);
+               dc.setPrecioProducto(p.getPrecio());
+               dc.setUnidades(p.getUnidades());
+               dc.setProducto(productoRepo.findById(p.getCodigo()).get());
+               //TODO verificar que las unidades esten disponibles
+               detalleCompraRepo.save(dc);
+
+           }
+
+           return compraGuardada;
+       }catch (Exception e){
+           throw  new Exception(e.getMessage());
+       }
+    }
+
 }
