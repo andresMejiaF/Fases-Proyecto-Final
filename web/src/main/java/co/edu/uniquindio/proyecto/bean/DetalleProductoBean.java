@@ -60,5 +60,19 @@ public class DetalleProductoBean implements Serializable {
         }
     }
 
+    /*
+    public Integer calificacionPromedio(){
+        int calificacion = 0;
+        int suma=0;
+        int resulado;
+        for(int i=0; i<comentarios.size(); i++){
+            calificacion+=comentarios.get(i).getCalificacion();
+            suma++;
+        }
+        resulado=calificacion/suma;
+        return resulado;
+    }
+
+     */
 
 }

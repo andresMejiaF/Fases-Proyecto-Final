@@ -7,61 +7,60 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core" >
-<h:head>
-    <meta http-equiv= "Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name= "viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Crear nuevo producto</title>
-</h:head>
-<h:body>
-    <p:panel header="Publicar Producto" >
-        <h:form>
-            <h:panelGrid columns="3" cellpadding="5">
-                <p:outputLabel for="codigo_producto" value="Codigo:" />
-                <p:inputText id="codigo_producto" value="#{productoBean.producto.codigo}" required="true"/>
-                <p:message for="codigo_producto" />
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title">Crear producto</ui:define>
+    <ui:define name="content">
 
-                <p:outputLabel for="nombre_producto" value="Nombre:" />
-                <p:inputText id="nombre_producto" value="#{productoBean.producto.nombre}" required="true"/>
-                <p:message for="nombre_producto" />
+        <p:panel header="Publicar Producto" >
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="codigo_producto" value="Codigo:" />
+                    <p:inputText id="codigo_producto" value="#{productoBean.producto.codigo}" required="true"/>
+                    <p:message for="codigo_producto" />
 
-                <p:outputLabel for="precio_producto" value="Precio:" />
-                <p:inputText id="precio_producto" value="#{productoBean.producto.precio}" required="true" type="number" />
-                <p:message for="precio_producto" />
+                    <p:outputLabel for="nombre_producto" value="Nombre:" />
+                    <p:inputText id="nombre_producto" value="#{productoBean.producto.nombre}" required="true"/>
+                    <p:message for="nombre_producto" />
 
-                <p:outputLabel for="descuento_producto" value="Descuento:" />
-                <p:inputText id="descuento_producto" value="#{productoBean.producto.descuento}" required="true" type="number" />
-                <p:message for="descuento_producto" />
+                    <p:outputLabel for="precio_producto" value="Precio:" />
+                    <p:inputText id="precio_producto" value="#{productoBean.producto.precio}" required="true" type="number" />
+                    <p:message for="precio_producto" />
 
-                <p:outputLabel for="unidades_producto" value="Unidades:" />
-                <p:inputText id="unidades_producto" value="#{productoBean.producto.unidades}" required="true" type="number"/>
-                <p:message for="unidades_producto" />
+                    <p:outputLabel for="descuento_producto" value="Descuento:" />
+                    <p:inputText id="descuento_producto" value="#{productoBean.producto.descuento}" required="true" type="number" />
+                    <p:message for="descuento_producto" />
+
+                    <p:outputLabel for="unidades_producto" value="Unidades:" />
+                    <p:inputText id="unidades_producto" value="#{productoBean.producto.unidades}" required="true" type="number"/>
+                    <p:message for="unidades_producto" />
 
 
-                <p:outputLabel for="categorias_p" value="Categorias:" />
-                <p:selectManyMenu id="categorias_p" value="#{productoBean.producto.categorias}" showCheckbox="true" required="true" converter="#{categoriaConverter}">
-                    <f:selectItems value="#{productoBean.categorias}" var="categoria" itemLabel="#{categoria.nombre}"/>
-                </p:selectManyMenu>
-                <p:message for="categorias_p" />
+                    <p:outputLabel for="categorias_p" value="Categorias:" />
+                    <p:selectManyMenu id="categorias_p" value="#{productoBean.producto.categorias}" showCheckbox="true" required="true" converter="#{categoriaConverter}">
+                        <f:selectItems value="#{productoBean.categorias}" var="categoria" itemLabel="#{categoria.nombre}"/>
+                    </p:selectManyMenu>
+                    <p:message for="categorias_p" />
 
-                <p:outputLabel for="ciudad_p" value="Ciudad:" />
-                <p:selectOneMenu id="ciudad_p" value="#{productoBean.producto.ciudad}" required="true" requiredMessage="La ciudad es obligatoria" converter="#{ciudadConverter}" >
-                    <f:selectItem itemLabel="Seleccione una Ciudad " noSelectionOption="true"/>
-                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"  value="#{productoBean.ciudades}" />
-                </p:selectOneMenu>
-                <p:message for="ciudad_p" />
+                    <p:outputLabel for="ciudad_p" value="Ciudad:" />
+                    <p:selectOneMenu id="ciudad_p" value="#{productoBean.producto.ciudad}" required="true" requiredMessage="La ciudad es obligatoria" converter="#{ciudadConverter}" >
+                        <f:selectItem itemLabel="Seleccione una Ciudad " noSelectionOption="true"/>
+                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"  value="#{productoBean.ciudades}" />
+                    </p:selectOneMenu>
+                    <p:message for="ciudad_p" />
 
-                <p:outputLabel for="imagenes_producto" value="Imágenes:" />
-                <p:fileUpload id="imagenes_producto" listener="#{productoBean.subirImagenes}" mode="advanced" multiple="true" sizeLimit="1000000" fileLimit="5"  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
-                <p:message for="imagenes_producto" />
+                    <p:outputLabel for="imagenes_producto" value="Imágenes:" />
+                    <p:fileUpload id="imagenes_producto" listener="#{productoBean.subirImagenes}" mode="advanced" multiple="true" sizeLimit="1000000" fileLimit="5"  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+                    <p:message for="imagenes_producto" />
 
-                <p:outputLabel for="descripcion_producto" value="Descripcion:" />
-                <p:textEditor id="descripcion_producto" value="#{productoBean.producto.descripcion}" height="300" secure="false" />
-                <p:message for="descripcion_producto" />
+                    <p:outputLabel for="descripcion_producto" value="Descripcion:" />
+                    <p:textEditor id="descripcion_producto" value="#{productoBean.producto.descripcion}" height="300" secure="false" />
+                    <p:message for="descripcion_producto" />
 
-            </h:panelGrid>
-            <p:growl showDetail="true" for="msj-bean" />
-            <p:commandButton value="Crear Producto" action="#{productoBean.crearProducto}" update="@form" icon="pi pi-desktop"/>
-        </h:form>
-    </p:panel>
-</h:body>
+                </h:panelGrid>
+                <p:growl showDetail="true" for="msj-bean" />
+                <p:commandButton value="Crear Producto" action="#{productoBean.crearProducto}" update="@form" icon="pi pi-desktop"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
 </html>
