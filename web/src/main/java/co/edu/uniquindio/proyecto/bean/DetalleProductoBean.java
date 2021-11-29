@@ -67,7 +67,7 @@ public class DetalleProductoBean implements Serializable {
     }
 
     public void agregarCarrito(){
-        
+
     }
 
 }

@@ -31,7 +31,7 @@
                         <h1 class="mt-4">#{detalleProductoBean.producto.nombre}</h1>
                         <h1 class="mt-4">$#{detalleProductoBean.producto.precio}</h1>
 
-                        <h:form class="mt-4">
+                        <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
                             <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart" />
                         </h:form>
 
@@ -52,7 +52,7 @@
             <h:outputText value="#{detalleProductoBean.producto.descripcion}" escape="false" />
         </p:panel>
 
-        <p:panel header="Hacer un comentario" styleClass="mt-3" >
+        <p:panel header="Hacer un comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado}" >
             <h:form id="crear-comentario">
                 <h:panelGrid columns="2" cellpadding="3">
                     <p:inputTextarea value="#{detalleProductoBean.nuevoComentario.mensaje}"
