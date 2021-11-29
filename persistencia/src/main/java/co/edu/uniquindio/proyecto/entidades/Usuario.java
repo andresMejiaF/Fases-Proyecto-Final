@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +20,9 @@ import java.util.Map;
  */
 public class Usuario extends Persona implements Serializable {
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER )
     @Column(nullable = false)
-    private Map <String, String> Telefono;
+    private Map <String, String> Telefono ;
 
     @Column(nullable = false, length = 150, unique = true)
     private String username;

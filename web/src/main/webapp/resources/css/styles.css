@@ -174,3 +174,18 @@
         width: 100%;
     }
 }
+
+#info-sesion{
+    position: relative;
+    display: inline-block;
+}
+
+#info-sesion > *{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+#info-sesion > h5{
+    margin-bottom: 0;
+}
