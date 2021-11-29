@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.bean;
 
+import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
@@ -14,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -29,6 +31,7 @@ public class UsuarioBean implements Serializable {
     private Ciudad ciudad;
     @Getter @Setter
     private List<Ciudad> ciudades;
+
 
     public UsuarioBean(UsuarioServicio usuarioServicio, CiudadServicio ciudadServicio) {
         this.usuarioServicio = usuarioServicio;

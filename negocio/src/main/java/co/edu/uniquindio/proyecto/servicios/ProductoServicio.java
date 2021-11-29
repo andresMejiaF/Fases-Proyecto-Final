@@ -1,8 +1,10 @@
 package co.edu.uniquindio.proyecto.servicios;
 
+import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ProductoNoEncontradoException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductoServicio {
@@ -34,5 +36,7 @@ public interface ProductoServicio {
     Categoria obtenerCategoria(String codigo) throws Exception;
 
     List<Producto> listarTodosLosProductos();
+
+    Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, );
 
 }
