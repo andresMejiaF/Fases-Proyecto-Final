@@ -27,6 +27,10 @@ public interface ProductoRepo extends JpaRepository<Producto, String> {
     @Query("Select p from Producto p where  :categoria member of p.categorias")
     List<Producto> listarPorCategoria(Categoria categoria);
 
+    //Listar productos por codigo de usuario
+    @Query("select p from Producto p join p.vendedor u where u.codigo=:codigo")
+    List<Producto> listarPorCodUsuario(String codigo);
+
     @Query("select p.vendedor.nombre from Producto p where  p.codigo=:id")
     String obtenerNombreVendedor(String id);
 

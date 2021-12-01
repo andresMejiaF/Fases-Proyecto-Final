@@ -89,7 +89,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<Producto> listarProductos(String codigoUsuario) throws Exception {
-        return null;
+        return productoRepo.listarPorCodUsuario(codigoUsuario);
     }
 
     @Override

@@ -43,6 +43,7 @@ public class ProductoBean implements Serializable {
     @Getter @Setter
     private List<Categoria> categorias;
 
+
     @Value("${upload.url}")
     private String urlUploads;
 
@@ -106,6 +107,8 @@ public class ProductoBean implements Serializable {
         }
         return null;
     }
+
+
 
 
 }

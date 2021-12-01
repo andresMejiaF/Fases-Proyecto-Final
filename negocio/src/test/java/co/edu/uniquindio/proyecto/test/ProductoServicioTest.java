@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
@@ -25,7 +28,7 @@ public class ProductoServicioTest {
     @Test
     public void obtenerProductoTest(){
         try {
-            Usuario vendedor = usuarioServicio.obtenerUsuario("57908");
+            Usuario vendedor = usuarioServicio.obtenerUsuario("94285");
             Producto producto = new Producto();
             LocalDate ldt = LocalDate.of(2021, 11, 25);
 
@@ -43,5 +46,13 @@ public class ProductoServicioTest {
         }catch (Exception e){
             Assertions.assertTrue(false, e.getMessage());
         }
+    }
+
+    @Test
+    public void listarTest() throws Exception {
+
+        List<Producto> list= productoServicio.listarProductos("94285");
+
+        list.forEach(System.out::println);
     }
 }

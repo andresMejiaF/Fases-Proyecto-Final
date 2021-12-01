@@ -1,13 +1,14 @@
 package co.edu.uniquindio.proyecto.bean;
 
-import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
+import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -26,15 +26,22 @@ public class UsuarioBean implements Serializable {
     private Usuario usuario;
     private final UsuarioServicio usuarioServicio;
 
+    private final  ProductoServicio productoServicio;
+
     private final CiudadServicio ciudadServicio;
     @Getter @Setter
     private Ciudad ciudad;
     @Getter @Setter
     private List<Ciudad> ciudades;
 
+    @Value("#{seguridadBean.usuarioSesion}")
+    private Usuario usuarioSesion;
+    @Getter @Setter
+    private List<Producto> productos;
 
-    public UsuarioBean(UsuarioServicio usuarioServicio, CiudadServicio ciudadServicio) {
+    public UsuarioBean(UsuarioServicio usuarioServicio, ProductoServicio productoServicio, CiudadServicio ciudadServicio) {
         this.usuarioServicio = usuarioServicio;
+        this.productoServicio = productoServicio;
         this.ciudadServicio = ciudadServicio;
     }
 
@@ -42,6 +49,12 @@ public class UsuarioBean implements Serializable {
     public void inicializar(){
         usuario= new Usuario();
         ciudades= ciudadServicio.listarCiudades();
+        try {
+            this.productos=productoServicio.listarProductos(usuarioSesion.getCodigo());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public  void  registrarUsuario(){
@@ -54,5 +67,22 @@ public class UsuarioBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
         }
     }
+
+    /*
+    public List<Producto> productosUsuario(){
+
+        if (usuarioSesion!=null) {
+
+            try {
+                List<Producto> productos = productoServicio.listarProductos(usuarioSesion.getCodigo());
+                return productos;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+    */
+
 
 }

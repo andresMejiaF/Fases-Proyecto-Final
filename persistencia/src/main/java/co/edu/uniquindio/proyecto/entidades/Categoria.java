@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
+
 /**
  * Se crea una llave principal con una condición
  * se crea una variable nombre y una lista productos
@@ -29,8 +29,12 @@ public class Categoria implements Serializable {
     private String nombre;
 
     @ManyToMany(mappedBy = "categorias")
-    @ToString.Exclude
     private List<Producto> productos;
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 
     public Categoria(String codigo, String nombre){
         this.codigo=codigo;

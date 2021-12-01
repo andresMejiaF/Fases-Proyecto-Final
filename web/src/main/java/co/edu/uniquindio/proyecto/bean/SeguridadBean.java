@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.bean;
 
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
@@ -17,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 @Scope("session")
 @Component
@@ -27,6 +29,7 @@ public class SeguridadBean implements Serializable {
 
     @Getter@Setter
     private String email, password;
+
     @Getter@Setter
     private Usuario usuarioSesion;
 
@@ -40,11 +43,14 @@ public class SeguridadBean implements Serializable {
 
     @Autowired
     private ProductoServicio productoServicio;
+    @Getter @Setter
+    private List<Producto> productos;
 
     @PostConstruct
     public  void inicializar(){
         this.subTotal= 0F;
         this.productosCarrito= new ArrayList<>();
+
     }
 
     public String inciarSesion(){
@@ -52,6 +58,7 @@ public class SeguridadBean implements Serializable {
             try {
 
                 usuarioSesion= usuarioServicio.iniciarSesion(email, password);
+
                 autenticado=true;
                 return "/index?faces-redirect=true";
             } catch (Exception e) {
@@ -107,4 +114,6 @@ public class SeguridadBean implements Serializable {
             }
         }
     }
+
+
 }
