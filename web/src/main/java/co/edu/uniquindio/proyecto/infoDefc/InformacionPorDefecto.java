@@ -42,12 +42,10 @@ public class InformacionPorDefecto implements CommandLineRunner {
         categoriaServicio.registrarCategoria(new Categoria("02", "Deporte" ));
         categoriaServicio.registrarCategoria(new Categoria("03", "Ropa" ));
         categoriaServicio.registrarCategoria(new Categoria("04", "Libros" ));
-        categoriaServicio.registrarCategoria(new Categoria("05", "Video juegos" ));
+        categoriaServicio.registrarCategoria(new Categoria("05", "Videojuegos" ));
         categoriaServicio.registrarCategoria(new Categoria("06", "Electrodomesticos" ));
-        categoriaServicio.registrarCategoria(new Categoria("07", "Otros" ));
+        categoriaServicio.registrarCategoria(new Categoria("09", "Otros" ));
     }
-
-
 
     }
 }
