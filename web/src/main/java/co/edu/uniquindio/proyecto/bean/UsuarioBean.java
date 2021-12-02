@@ -57,7 +57,7 @@ public class UsuarioBean implements Serializable {
         ciudades= ciudadServicio.listarCiudades();
         try {
             this.productos=productoServicio.listarProductos(usuarioSesion.getCodigo());
-            this.productosComprados=productoServicio.listarProductos(usuarioSesion.getCodigo());
+            this.productosComprados=productoServicio.listarProductoComprado(usuarioSesion.getCodigo());
         } catch (Exception e) {
             e.printStackTrace();
         }
