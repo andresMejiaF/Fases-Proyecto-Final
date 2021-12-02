@@ -27,6 +27,8 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Autowired
     private CompraRepo compraRepo;
 
+
+
     @Override
     public Producto publicarProducto(Producto producto) throws Exception {
         try {
@@ -105,6 +107,11 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public List<Producto> listarTodosLosProductos() {
         return productoRepo.findAll();
+    }
+
+    @Override
+    public List<Producto> listarProductoComprado(String codigo) {
+        return compraRepo.obtenerListaProductosComprados(codigo);
     }
 
     @Override

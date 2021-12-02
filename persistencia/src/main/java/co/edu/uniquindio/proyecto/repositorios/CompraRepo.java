@@ -18,6 +18,8 @@ public interface CompraRepo  extends JpaRepository<Compra, String> {
     //lista de productos que ha comprado un usuario
     @Query("select d.producto from Compra  c join c.detalleCompras d where  c.usuario.codigo= :codigo")
     List<Producto> obtenerListaProductosComprados(String codigo);
+
+
     //Devolver numero de productos queha comprado un usuario
     @Query("select  count( distinct d.producto) from Compra  c join c.detalleCompras d where  c.usuario.codigo= :codigo")
     Long obtenerListaProductosCompradosU(String codigo);

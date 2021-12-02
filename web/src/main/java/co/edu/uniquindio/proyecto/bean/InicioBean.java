@@ -31,4 +31,9 @@ public class InicioBean implements Serializable {
         return "detalle_producto?faces-redirect=true&amp;producto="+id;
     }
 
+    public  String irAGestion(String id){
+
+        return "gestionar_producto?faces-redirect=true&amp;producto="+id;
+    }
+
 }

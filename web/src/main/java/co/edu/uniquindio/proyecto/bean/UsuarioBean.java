@@ -29,6 +29,8 @@ public class UsuarioBean implements Serializable {
     private final  ProductoServicio productoServicio;
 
     private final CiudadServicio ciudadServicio;
+
+
     @Getter @Setter
     private Ciudad ciudad;
     @Getter @Setter
@@ -38,6 +40,10 @@ public class UsuarioBean implements Serializable {
     private Usuario usuarioSesion;
     @Getter @Setter
     private List<Producto> productos;
+
+    @Getter @Setter
+    private List<Producto> productosComprados;
+
 
     public UsuarioBean(UsuarioServicio usuarioServicio, ProductoServicio productoServicio, CiudadServicio ciudadServicio) {
         this.usuarioServicio = usuarioServicio;
@@ -51,6 +57,7 @@ public class UsuarioBean implements Serializable {
         ciudades= ciudadServicio.listarCiudades();
         try {
             this.productos=productoServicio.listarProductos(usuarioSesion.getCodigo());
+            this.productosComprados=productoServicio.listarProductos(usuarioSesion.getCodigo());
         } catch (Exception e) {
             e.printStackTrace();
         }
