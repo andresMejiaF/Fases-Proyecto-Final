@@ -52,7 +52,7 @@ public class DetalleProductoBean implements Serializable {
         if(codigoProducto!=null && !codigoProducto.isEmpty()){
             producto = productoServicio.obtenerProducto(codigoProducto);
             this.comentarios= producto.getComentarios();
-            calificacionPromedio= Math.round(productoServicio.obtenerPromedioCalificacion(codigoProducto));
+            this.calificacionPromedio= Math.round(productoServicio.obtenerPromedioCalificacion(codigoProducto));
         }
     }
 

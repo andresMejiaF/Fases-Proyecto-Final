@@ -144,7 +144,16 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public Float obtenerPromedioCalificacion(String codigoProducto) {
-        return productoRepo.obtenerPromedioCalificaciones(codigoProducto);
+
+        if(productoRepo.obtenerPromedioCalificaciones(codigoProducto)!= null){
+            return productoRepo.obtenerPromedioCalificaciones(codigoProducto);
+        }
+        return 0F;
+    }
+
+    @Override
+    public List<Producto> buscarProductoVarios(String cadena) {
+        return productoRepo.buscarProductos(cadena);
     }
 
 }

@@ -66,6 +66,9 @@ public interface ProductoRepo extends JpaRepository<Producto, String> {
     @Query("select p from Producto p where p.nombre like concat('%', :nombre,   '%') ")
     List<Producto> buscarProductoNombre(String nombre);
 
+    @Query("select p from Producto p left join p.categorias c where p.nombre like concat('%', :cadena,'%') or c.nombre like concat('%', :cadena,'%') or p.ciudad.nombre like concat('%', :cadena,'%') ")
+    List<Producto> buscarProductos(String cadena);
+
     //cuantos productosha publicado a la venta cada usuario
     @Query("select new co.edu.uniquindio.proyecto.dto.ProductosPorUsuario(p.vendedor.codigo, p.vendedor.email, count (p)) from Producto p group by p.vendedor")
     List<ProductosPorUsuario> obteneProductosEnVenta();

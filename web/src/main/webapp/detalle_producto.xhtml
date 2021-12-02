@@ -31,6 +31,7 @@
                         <h1 class="mt-4">#{detalleProductoBean.producto.nombre}</h1>
                         <h1 class="mt-4">$#{detalleProductoBean.producto.precio}</h1>
 
+
                         <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
 
                             <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart" update="@form" action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.codigo,detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre, detalleProductoBean.producto.imagenPrincipal )}" />
@@ -41,6 +42,7 @@
                     <div class="box">
                         <p:rating value="#{detalleProductoBean.calificacionPromedio}" readonly="true" />
                         <p>Ciudad: #{detalleProductoBean.producto.ciudad.nombre}</p>
+                        <p>#{detalleProductoBean.producto.unidades} unidades disponibles</p>
 
                     </div>
                     <p:dataList emptyMessage="No hay categorias para este producto" styleClass="Lista-carac" value="#{detalleProductoBean.producto.categorias}" var="categoria">

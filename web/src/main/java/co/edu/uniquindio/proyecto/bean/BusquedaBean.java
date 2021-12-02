@@ -31,7 +31,8 @@ public class BusquedaBean implements Serializable {
     @PostConstruct
     public void inicializar(){
         if(busquedaParam !=null && !busquedaParam.isEmpty()){
-            productos =productoServicio.buscarProductos(busquedaParam, null);
+          //  productos =productoServicio.buscarProductos(busquedaParam, null);
+            productos = productoServicio.buscarProductoVarios(busquedaParam);
         }
     }
 
