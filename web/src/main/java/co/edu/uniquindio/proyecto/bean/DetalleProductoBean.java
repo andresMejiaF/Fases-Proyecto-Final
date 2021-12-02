@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -41,12 +41,18 @@ public class DetalleProductoBean implements Serializable {
     @Value("#{seguridadBean.usuarioSesion}")
     private Usuario usuarioSesion;
 
+    @Getter@Setter
+    private Integer calificacionPromedio;
+
+
+
     @PostConstruct
     public void inicializar(){
         nuevoComentario= new Comentario();
         if(codigoProducto!=null && !codigoProducto.isEmpty()){
             producto = productoServicio.obtenerProducto(codigoProducto);
             this.comentarios= producto.getComentarios();
+            calificacionPromedio= Math.round(productoServicio.obtenerPromedioCalificacion(codigoProducto));
         }
     }
 
@@ -66,8 +72,7 @@ public class DetalleProductoBean implements Serializable {
         }
     }
 
-    public void agregarCarrito(){
 
-    }
+
 
 }

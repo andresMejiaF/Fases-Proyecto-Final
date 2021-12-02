@@ -39,7 +39,9 @@
 
                     </div>
                     <div class="box">
+                        <p:rating value="#{detalleProductoBean.calificacionPromedio}" readonly="true" />
                         <p>Ciudad: #{detalleProductoBean.producto.ciudad.nombre}</p>
+
                     </div>
                     <p:dataList emptyMessage="No hay categorias para este producto" styleClass="Lista-carac" value="#{detalleProductoBean.producto.categorias}" var="categoria">
                         <f:facet name="header">Categoria</f:facet>

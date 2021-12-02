@@ -55,6 +55,7 @@ public class ProductoBean implements Serializable {
     @Value("#{seguridadBean.usuarioSesion}")
     private Usuario usuarioSesion;
 
+
     @PostConstruct
     public void inicializar(){
         this.producto= new Producto();

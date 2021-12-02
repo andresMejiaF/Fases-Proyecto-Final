@@ -142,4 +142,9 @@ public class ProductoServicioImpl implements ProductoServicio {
        }
     }
 
+    @Override
+    public Float obtenerPromedioCalificacion(String codigoProducto) {
+        return productoRepo.obtenerPromedioCalificaciones(codigoProducto);
+    }
+
 }
