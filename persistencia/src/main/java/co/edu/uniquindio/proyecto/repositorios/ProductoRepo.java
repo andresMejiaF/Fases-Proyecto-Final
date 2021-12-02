@@ -63,7 +63,7 @@ public interface ProductoRepo extends JpaRepository<Producto, String> {
     List<Producto> obtenerProductosSinComentarios();
 
     //filtrar por nombre, busqueda
-    @Query("select p from Producto p where p.nombre like concat('%', :nombre, '%') ")
+    @Query("select p from Producto p where p.nombre like concat('%', :nombre,   '%') ")
     List<Producto> buscarProductoNombre(String nombre);
 
     //cuantos productosha publicado a la venta cada usuario
