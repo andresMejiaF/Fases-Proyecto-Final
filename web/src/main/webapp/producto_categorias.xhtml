@@ -12,6 +12,21 @@
 <ui:define name="content">
     <h1>Titulo prueba</h1>
 
+    <p:outputLabel for="ciudad_p" value="Ciudad:" />
+    <p:selectOneMenu id="ciudad_p" value="#{productoBean.producto.ciudad}" required="true" requiredMessage="La ciudad es obligatoria" converter="#{ciudadConverter}" >
+        <f:selectItem itemLabel="Seleccione una Ciudad " noSelectionOption="true"/>
+        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"  value="#{productoBean.ciudades}" />
+    </p:selectOneMenu>
+    <p:message for="ciudad_p" />
+
+    <p:outputLabel for="categorias_p" value="Categorias:" />
+    <p:selectManyMenu id="categorias_p" value="#{productoBean.producto.categorias}" showCheckbox="true" required="true" converter="#{categoriaConverter}">
+        <f:selectItems value="#{productoBean.categorias}" var="categoria" itemLabel="#{categoria.nombre}"/>
+    </p:selectManyMenu>
+    <p:message for="categorias_p" />
+
+
+
 </ui:define>
 </ui:composition>
 </html>
