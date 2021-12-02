@@ -22,4 +22,9 @@ public class CiudadServicioImpl implements CiudadServicio{
     public Ciudad obtenerCiudad(Integer id) throws Exception {
         return ciudadRepo.findById(id).orElseThrow(()-> new Exception("El id no corresponde a ninguna ciudad"));
     }
+
+    @Override
+    public void registrarCiudad(Ciudad ciudad) {
+        ciudadRepo.save(ciudad);
+    }
 }
