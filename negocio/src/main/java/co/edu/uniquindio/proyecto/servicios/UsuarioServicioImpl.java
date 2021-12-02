@@ -91,4 +91,31 @@ import java.util.Optional;
         return usuarioRepo.findByEmailAndPassword(email, password).orElseThrow(() -> new Exception("Los datos de autenticacion son incorrectos"));
 
     }
+
+    @Override
+    public Usuario obtenerPersonaEmail(String email) throws Exception {
+
+        Optional<Usuario> personaEncontrada = usuarioRepo.findByEmail(email);
+
+        if(personaEncontrada.isEmpty()){
+
+            throw new Exception("No existe un usuario con el correo dado");
+        }
+        return personaEncontrada.get();
+    }
+
+
+    @Override
+    public void cambiarPassword(String email,String passwordN) throws Exception {
+
+        Usuario personaEncontrada = obtenerPersonaEmail(email);
+
+        if (personaEncontrada!=null){
+            personaEncontrada.setPassword(passwordN);
+            usuarioRepo.save(personaEncontrada);
+        }else{
+            throw new Exception("No existe una persona con el correo dado");
+        }
+
+    }
 }

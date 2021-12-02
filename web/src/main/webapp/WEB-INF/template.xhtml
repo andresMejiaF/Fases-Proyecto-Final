@@ -123,6 +123,10 @@
             <p:password id="password_login" value="#{seguridadBean.password}" required="true"
             />
             <p:message for="password_login" />
+            <!--Recuperar clave-->
+            <p:commandButton style="min-width: 30%" value="Recuperar contraseña"
+                             styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
+                             onclick="PF('dlg2').show()"/>
         </h:panelGrid>
         <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.inciarSesion}"
                          styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
@@ -130,6 +134,37 @@
     </h:form>
     </p:dialog>
 
+    <!--Pagina de recuperación-->
+    <h:form>
+        <p:dialog header="Recupera tu cuenta" widgetVar="dlg2" Height="400px" width="40%" showEffect="fade"
+                  closeOnEscape="true">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h5>Correo electronico</h5>
+                    <p:inputText id="correo" value="#{seguridadBean.emailR}" styleClass="p-d-block"
+                                 style="width: 100%"
+                                 required="true" requiredMessage="¡Ups! olvidaste el email"/>
+                </div>
+
+                <div class="col-2">
+                    <div class="fotox">
+                        <img src="resources/img/password.png" alt=""/>
+                    </div>
+                </div>
+            </div>
+
+
+            <f:facet name="footer">
+                <p:commandButton style="min-width: 30%" value="Recuperar contraseña"
+                                 action="#{seguridadBean.buscarPorEmail}"
+                                 styleClass="ui-button-raised ui-button-success ui-button-flat"
+                                 update="@form" icon="pi pi-sign-in" iconPos="left"/>
+                <p:growl showDetail="true" for="login-bean"/>
+            </f:facet>
+        </p:dialog>
+    </h:form>
+<!--cierre-->
 
 
     <div id="content">

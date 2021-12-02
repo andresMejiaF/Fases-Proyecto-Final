@@ -4,6 +4,7 @@ package co.edu.uniquindio.proyecto.bean;
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.servicios.MailService;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,16 @@ public class SeguridadBean implements Serializable {
 
     @Getter@Setter
     private Usuario usuarioSesion;
+
+    @Getter @Setter
+    private Usuario usuarioAux;
+
+    @Autowired
+    private MailService mailService;
+
+    @Getter @Setter
+    @NotBlank
+    private String emailR;
 
     @Autowired
     private UsuarioServicio usuarioServicio;
@@ -115,5 +127,68 @@ public class SeguridadBean implements Serializable {
         }
     }
 
+    /**
+     * Método para buscar el correo
+     * @return
+     */
+    public String buscarPorEmail(){
 
+        try {
+            usuarioAux = usuarioServicio.obtenerPersonaEmail(emailR);
+
+            if(usuarioAux!=null){
+
+                sendMail();
+            }else{
+
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "El email que ingreso no se encuentra registrado");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
+
+            return "/index?faces-redirect=true";
+
+        }catch (Exception e){
+
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
+        return null;
+    }
+
+    /**
+     * Método para cambiar clave
+     */
+    public void cambiarPassword(){
+
+        try {
+            if (!password.isEmpty()){
+
+                usuarioServicio.cambiarPassword(email,password);
+
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "La contraseña se actualizo con exito");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+            }else{
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No se pudo actualizar la contraseña");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
+
+        }catch (Exception e){
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
+
+    }
+
+    /**
+     * Método para enviar el correo de recuperación
+     */
+    public void sendMail()
+    {
+        String subject = "Recuperacion de contraseña";
+        String url = "http://localhost:8080/recuperarContrasena.xhtml";
+        String message = "Un saludo por parte de unishop!" + "\n" + " Para recuperar su contraseña, de click en el siguiente enlace: " + "\n" + url;
+
+        mailService.sendMail("pruebayespacio@gmail.com", usuarioAux.getEmail(),subject,message);
+    }
 }

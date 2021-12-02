@@ -4,10 +4,12 @@ import co.edu.uniquindio.proyecto.entidades.Ciudad;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
+import co.edu.uniquindio.proyecto.servicios.MailService;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -30,11 +32,13 @@ public class UsuarioBean implements Serializable {
 
     private final CiudadServicio ciudadServicio;
 
-
     @Getter @Setter
     private Ciudad ciudad;
     @Getter @Setter
     private List<Ciudad> ciudades;
+
+    @Autowired
+    private MailService mailService;
 
     @Value("#{seguridadBean.usuarioSesion}")
     private Usuario usuarioSesion;
@@ -91,5 +95,13 @@ public class UsuarioBean implements Serializable {
     }
     */
 
+    public void sendMailRespuesta(String respuesta,String email){
+
+        String subject = "En hora buena, alguien respondio tu comentario";
+        String message = respuesta;
+
+        mailService.sendMail("pruebayespacio@gmail.com", email,subject,message);
+
+    }
 
 }
