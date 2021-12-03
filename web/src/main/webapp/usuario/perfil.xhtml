@@ -8,26 +8,64 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core" >
 <ui:composition template="../WEB-INF/template.xhtml">
-<ui:define name="title">Mis productos</ui:define>
-<ui:define name="content">
+    <ui:define name="title">Mis productos</ui:define>
+    <ui:define name="content">
 
-    <div>
+        <div>
 
-        <h1><img class="align-content-center" src="../resources/img/user.png" alt=""/>  Bienvenido a su perfil <i class="text-capitalize">#{seguridadBean.usuarioSesion.nombre}</i></h1>
+            <h1><img class="align-content-center" src="../resources/img/user.png" alt=""/>  Bienvenido a su perfil <i class="text-capitalize">#{seguridadBean.usuarioSesion.nombre}</i></h1>
+            <p:divider></p:divider>
+            <h4 class="text-muted">Datos del usuario</h4>
+            <br></br>
+            <h4>Nickname: <i class="text-capitalize">#{seguridadBean.usuarioSesion.username}</i></h4>
+            <br></br>
+            <h4>Telefono principal: <i class="text-capitalize">#{seguridadBean.telefono}</i></h4>
+            <br></br>
+            <h4>Ciudad: <i class="text-capitalize">#{seguridadBean.usuarioSesion.ciudad.nombre}</i> </h4>
+            <br></br>
+            <h4>Email: <i class="text-primary">#{seguridadBean.usuarioSesion.email}</i></h4>
+        </div>
+
         <p:divider></p:divider>
-        <h4 class="text-muted">Datos del usuario</h4>
-        <br></br>
-        <h4>Nickname: <i class="text-capitalize">#{seguridadBean.usuarioSesion.username}</i></h4>
-        <br></br>
-        <h4>Telefono: <!--poner la ruta del telefono--></h4>
-        <br></br>
-        <h4>Ciudad: <i class="text-capitalize">#{seguridadBean.usuarioSesion.ciudad.nombre}</i> </h4>
-        <br></br>
-        <h4>Email: <i class="text-primary">#{seguridadBean.usuarioSesion.email}</i></h4>
-    </div>
+
+        <div>
+            <h1>Lista Productos favoritos </h1>
+        </div>
 
 
 
-</ui:define>
+        <h:form>
+
+            <p:dataView value="#{usuarioBean.favoritos}"  var="producto" gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+
+                <p:dataViewListItem>
+                    <div class="row d-flex item-pro" >
+                        <div class="col-lg-2 col-md-1" style="text-align: center" >
+                            <p:graphicImage url="/uploads/#{producto.imagenPrincipal}" styleClass="imagen-producto" />
+
+                        </div>
+                        <div class="col-lg-8 col-md-1 align-self-center" >
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{producto.nombre}" style="font-weight: bold" />
+                                    <h:outputText value="Precio:" />
+                                    <h:outputText value="$#{producto.precio}" />
+                                    <h:outputText value="Categorías:"/>
+                                    <h:outputText value="#{producto.categorias}" />
+
+
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </div>
+
+                    </div>
+                </p:dataViewListItem>
+            </p:dataView>
+        </h:form>
+
+
+
+    </ui:define>
 </ui:composition>
 </html>
