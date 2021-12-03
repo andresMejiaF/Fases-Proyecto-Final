@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.Pageable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +47,9 @@ public interface UsuarioRepo extends JpaRepository <Usuario, String>{
     @Query("select c.nombre,  count(u) from  Usuario  u join u.ciudad c group by c")
     List<Object[]> obtenerUsuariosPorCiudad();
 
+    /*
+    @Query("select u.telefonos from Usuario  u join u.telefonos where u.codigo=:codigo")
+    ArrayList<String> obtenerTelefonos(String codigo);
+     */
 }
 

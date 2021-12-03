@@ -56,6 +56,8 @@ public class UsuarioBean implements Serializable {
 
     @Getter@Setter
     private List<Producto> favoritos;
+    @Getter@Setter
+    private List<Producto> productosFavoritos;
 
 
     public UsuarioBean(UsuarioServicio usuarioServicio, ProductoServicio productoServicio, CiudadServicio ciudadServicio) {
@@ -69,6 +71,8 @@ public class UsuarioBean implements Serializable {
         usuario= new Usuario();
         ciudades= ciudadServicio.listarCiudades();
         telefonos= new ArrayList<>();
+        favoritos=productoServicio.productoFavorito(usuarioSesion.getCodigo());
+
         try {
             this.productos=productoServicio.listarProductos(usuarioSesion.getCodigo());
             this.productosComprados=productoServicio.listarProductoComprado(usuarioSesion.getCodigo());
@@ -104,7 +108,7 @@ public class UsuarioBean implements Serializable {
 
    public void agregarFavoritos(String codigo){
 
-        favoritos=productoServicio.productoFavorito(usuarioSesion.getCodigo());
+
         favoritos.add(productoServicio.obtenerProducto(codigo));
 
 
@@ -120,7 +124,7 @@ public class UsuarioBean implements Serializable {
    }
 
    public void eliminarDeFavoritos(String codigo){
-        favoritos=productoServicio.productoFavorito(usuarioSesion.getCodigo());
+
         favoritos.remove(productoServicio.obtenerProducto(codigo));
 
         usuarioSesion.setProductosFavoritos(favoritos);

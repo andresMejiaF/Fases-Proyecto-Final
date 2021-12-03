@@ -68,16 +68,20 @@ public class SeguridadBean implements Serializable {
 
     @Getter @Setter
     private Producto productAuxiliar;
+    @Getter@Setter
+    private String telefono;
 
     @PostConstruct
     public  void inicializar(){
         this.subTotal= 0F;
         this.productosCarrito= new ArrayList<>();
+
         mediosPago= new ArrayList<>();
         mediosPago.add("PSE");
         mediosPago.add("Tarjeta credito");
         mediosPago.add("Tarjeta debito");
         mediosPago.add("Pago contraentrega");
+
     }
 
     public String inciarSesion(){
@@ -85,7 +89,7 @@ public class SeguridadBean implements Serializable {
             try {
 
                 usuarioSesion= usuarioServicio.iniciarSesion(email, password);
-
+                telefono=usuarioSesion.getTelefonos().get(0);
                 autenticado=true;
                 return "/index?faces-redirect=true";
             } catch (Exception e) {

@@ -58,6 +58,9 @@ public class ProductoBean implements Serializable {
     @Getter @Setter
     private List<Producto> productosCategorias;
 
+    @Getter@Setter
+    private String nombreCat;
+
 
     @PostConstruct
     public void inicializar(){

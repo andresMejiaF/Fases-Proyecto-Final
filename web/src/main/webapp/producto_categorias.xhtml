@@ -10,7 +10,18 @@
 <ui:composition template="WEB-INF/template.xhtml">
 <ui:define name="title">Inicio</ui:define>
 <ui:define name="content">
-    <h1>Titulo prueba</h1>
+    <h:form styleClass="text-center">
+
+        <p:outputLabel for="categorias_producto" value="categorias: " />
+        <p:selectOneMenu id="categorias_producto" value="#{productoBean.nombreCat}" required="true" requiredMessage="seleccione una categoria"  >
+            <f:selectItem itemLabel="Seleccione una categoria " noSelectionOption="true"/>
+            <f:selectItems var="categoria" itemLabel="#{categoria}"
+                           value="#{productoBean.categorias}" />
+        </p:selectOneMenu>
+
+        <p:commandButton value="Buscar" update="@form" icon="pi pi-check" style="font-size: 20px" action="#{seguridadBean.comprar}"/>
+        <p:growl for="compra-msj" showDetail="true"/>
+    </h:form>
 
 
 </ui:define>

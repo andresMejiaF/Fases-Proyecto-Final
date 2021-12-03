@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UsuarioServicio {
@@ -25,5 +26,6 @@ public interface UsuarioServicio {
     Usuario obtenerPersonaEmail(String email) throws Exception;
 
     void cambiarPassword(String email,String passwordN) throws Exception;
+
 
 }
