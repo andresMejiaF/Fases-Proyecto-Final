@@ -21,9 +21,8 @@ import java.util.Map;
  */
 public class Usuario extends Persona implements Serializable {
 
-    @ElementCollection(fetch = FetchType.EAGER )
-    @Column(nullable = false)
-    private Map <String, String> Telefono ;
+    @ElementCollection
+    private List<String> telefonos;
 
     @Column(nullable = false, length = 150, unique = true)
     private String username;
@@ -31,7 +30,6 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Chat> chats;
 
-   // @JoinColumn(nullable = false)
     @ManyToOne
     private Ciudad ciudad;
 
@@ -55,9 +53,8 @@ public class Usuario extends Persona implements Serializable {
     private List<Producto> productosFavoritos;
 
 
-    public Usuario(String codigo, String nombre, String email, String password, Map<String, String> telefono, Ciudad ciudad, String username) {
+    public Usuario(String codigo, String nombre, String email, String password,  Ciudad ciudad, String username) {
         super(codigo, nombre, email, password);
-        this.Telefono = telefono;
         this.ciudad=ciudad;
         this.username=username;
     }

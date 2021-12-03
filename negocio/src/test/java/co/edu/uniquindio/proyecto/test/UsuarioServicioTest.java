@@ -27,7 +27,7 @@ public class UsuarioServicioTest {
         Map<String, String> telefonos= new HashMap<>();
         telefonos.put("Casa", "3104327744");
         telefonos.put("Celular", "3214161");
-        Usuario u = new Usuario("57908","Carlos", "prueba2@Gmail", "password123",telefonos, null,"pruebaUsu" );
+        Usuario u = new Usuario("57908","Carlos", "prueba2@Gmail", "password123", null,"pruebaUsu" );
 
         try {
             Usuario respuesta= usuarioServicio.registrarUsuario(u);
@@ -53,7 +53,7 @@ public class UsuarioServicioTest {
         Map<String, String> telefonos= new HashMap<>();
         telefonos.put("Casa", "3104327744");
         telefonos.put("Celular", "3214161");
-        Usuario u = new Usuario("5790238","Mario", "prueba23@Gmail", "password123",telefonos, null,"pruebaUsuar" );
+        Usuario u = new Usuario("5790238","Mario", "prueba23@Gmail", "password123", null,"pruebaUsuar" );
         usuarioServicio.registrarUsuario(u);
         List<Usuario> list= usuarioServicio.listarUsuarios();
 

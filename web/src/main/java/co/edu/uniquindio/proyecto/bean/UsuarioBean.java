@@ -17,8 +17,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.persistence.Column;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @ViewScoped
@@ -47,6 +50,9 @@ public class UsuarioBean implements Serializable {
 
     @Getter @Setter
     private List<Producto> productosComprados;
+    @Getter @Setter
+    private String telefono;
+    private ArrayList<String> telefonos;
 
 
     public UsuarioBean(UsuarioServicio usuarioServicio, ProductoServicio productoServicio, CiudadServicio ciudadServicio) {
@@ -59,6 +65,7 @@ public class UsuarioBean implements Serializable {
     public void inicializar(){
         usuario= new Usuario();
         ciudades= ciudadServicio.listarCiudades();
+        telefonos= new ArrayList<>();
         try {
             this.productos=productoServicio.listarProductos(usuarioSesion.getCodigo());
             this.productosComprados=productoServicio.listarProductoComprado(usuarioSesion.getCodigo());
@@ -69,7 +76,9 @@ public class UsuarioBean implements Serializable {
     }
 
     public  void  registrarUsuario(){
+            telefonos.add(telefono);
         try {
+            usuario.setTelefonos(telefonos);
             usuarioServicio.registrarUsuario(usuario);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Registro Exitoso!");
             FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
@@ -79,21 +88,7 @@ public class UsuarioBean implements Serializable {
         }
     }
 
-    /*
-    public List<Producto> productosUsuario(){
 
-        if (usuarioSesion!=null) {
-
-            try {
-                List<Producto> productos = productoServicio.listarProductos(usuarioSesion.getCodigo());
-                return productos;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
-    */
 
     public void sendMailRespuesta(String respuesta,String email){
 

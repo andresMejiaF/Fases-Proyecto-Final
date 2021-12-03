@@ -41,6 +41,10 @@
                     </p:selectOneMenu>
                     <p:message for="ciudad_usuario" />
 
+                    <p:outputLabel for="telefono_usuario" value="telefono: " />
+                    <p:inputText id="telefono_usuario" value="#{usuarioBean.telefono}" required="true" />
+                    <p:message for="telefono_usuario" />
+
                 </h:panelGrid>
                 <p:growl showDetail="true" for="msj-bean" />
                 <p:commandButton value="Registrar Usuario" action="#{usuarioBean.registrarUsuario}" update="@form" icon="pi pi-user"/>
