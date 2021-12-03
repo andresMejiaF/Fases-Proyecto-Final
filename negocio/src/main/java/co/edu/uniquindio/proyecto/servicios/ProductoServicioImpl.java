@@ -7,6 +7,7 @@ import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -127,6 +128,8 @@ public class ProductoServicioImpl implements ProductoServicio {
            Compra compraGuardada = compraRepo.save(compra);
 
            DetalleCompra dc;
+           Producto prod;
+           Integer unidades;
            for (ProductoCarrito p : productos) {
                dc = new DetalleCompra();
                dc.setCompra(compraGuardada);
@@ -135,8 +138,13 @@ public class ProductoServicioImpl implements ProductoServicio {
                dc.setProducto(productoRepo.findById(p.getCodigo()).get());
                //TODO verificar que las unidades esten disponibles
                detalleCompraRepo.save(dc);
-
+               prod=obtenerProducto(p.getCodigo());
+               unidades=prod.getUnidades();
+               unidades=unidades -p.getUnidades();
+               prod.setUnidades(unidades);
+               actualizarProducto(prod);
            }
+
 
            return compraGuardada;
        }catch (Exception e){

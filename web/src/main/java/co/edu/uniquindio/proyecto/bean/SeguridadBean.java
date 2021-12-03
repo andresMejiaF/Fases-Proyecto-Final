@@ -57,12 +57,25 @@ public class SeguridadBean implements Serializable {
     private ProductoServicio productoServicio;
     @Getter @Setter
     private List<Producto> productos;
+    @Getter@Setter
+    private ArrayList<String> mediosPago;
+    @Getter @Setter
+    private String medio;
+
+    private boolean agregar;
+
+    @Getter @Setter
+    private Producto productAuxiliar;
 
     @PostConstruct
     public  void inicializar(){
         this.subTotal= 0F;
         this.productosCarrito= new ArrayList<>();
-
+        mediosPago= new ArrayList<>();
+        mediosPago.add("PSE");
+        mediosPago.add("Tarjeta credito");
+        mediosPago.add("Tarjeta debito");
+        mediosPago.add("Pago contraentrega");
     }
 
     public String inciarSesion(){
@@ -113,9 +126,22 @@ public class SeguridadBean implements Serializable {
     }
 
     public void comprar(){
-        if(usuarioSesion!=null && !productosCarrito.isEmpty()) {
+        Integer unidades;
+        agregar=true;
+
+        for(int i=0; i<productosCarrito.size() ; i++){
+            if(productosCarrito.get(i).getUnidades()>productoServicio.obtenerProducto(productosCarrito.get(i).getCodigo()).getUnidades()){
+                FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Las unidades que trara de agregar para el producto: "
+                        +productosCarrito.get(i).getNombre()+" son mayores a las disponibles");
+                FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
+                agregar=false;
+            }
+        }
+
+
+        if(usuarioSesion!=null && !productosCarrito.isEmpty() && agregar!=false) {
             try {
-                productoServicio.comprarProductos(usuarioSesion, productosCarrito, "PSE");
+                productoServicio.comprarProductos(usuarioSesion, productosCarrito, medio);
                 productosCarrito.clear();
                 subTotal=0F;
                 FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada corrctamente");
@@ -124,6 +150,9 @@ public class SeguridadBean implements Serializable {
                 FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
             }
+        }else {
+            FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Verifica los datos");
+            FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
         }
     }
 
