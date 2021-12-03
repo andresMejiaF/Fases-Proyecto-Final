@@ -71,14 +71,15 @@
 
                 <h:form styleClass="text-center">
 
-                    <p:outputLabel for="medio_pago" value="medio de pago: " />
-                    <p:selectOneMenu id="medio_pago" value="#{seguridadBean.medio}" required="true" requiredMessage="El medio de pago es obligatorio para efectuar la compra"  >
+                    <p:outputLabel styleClass="text-center" for="medio_pago" value="Seleccione un medio de pago: " />
+                    <p:selectOneMenu styleClass="center" id="medio_pago" value="#{seguridadBean.medio}" required="true" requiredMessage="El medio de pago es obligatorio para efectuar la compra"  >
                         <f:selectItem itemLabel="Seleccione un medio " noSelectionOption="true"/>
                         <f:selectItems var="medio" itemLabel="#{medio}"
                                        value="#{seguridadBean.mediosPago}" />
                     </p:selectOneMenu>
+                    <p> </p>
 
-                    <p:commandButton value="Comprar" update="@form" icon="pi pi-check" style="font-size: 20px" action="#{seguridadBean.comprar}"/>
+                    <p:commandButton styleClass="bg-primary" value="Comprar" update="@form" icon="pi pi-check" style="font-size: 20px" action="#{seguridadBean.comprar}"/>
                     <p:growl for="compra-msj" showDetail="true"/>
                 </h:form>
 

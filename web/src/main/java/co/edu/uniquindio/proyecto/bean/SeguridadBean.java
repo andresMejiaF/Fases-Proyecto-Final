@@ -35,6 +35,8 @@ public class SeguridadBean implements Serializable {
     @Getter@Setter
     private Usuario usuarioSesion;
 
+    private String respuesta;
+
     @Getter @Setter
     private Usuario usuarioAux;
 
@@ -125,7 +127,8 @@ public class SeguridadBean implements Serializable {
         }
     }
 
-    public void comprar(){
+    public void comprar()
+    {
         Integer unidades;
         agregar=true;
 
@@ -138,14 +141,16 @@ public class SeguridadBean implements Serializable {
             }
         }
 
-
         if(usuarioSesion!=null && !productosCarrito.isEmpty() && agregar!=false) {
             try {
                 productoServicio.comprarProductos(usuarioSesion, productosCarrito, medio);
                 productosCarrito.clear();
                 subTotal=0F;
-                FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada corrctamente");
+                correoCompra(productosCarrito);
+                FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada correctamente");
+
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
+
             } catch (Exception e) {
                 FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
@@ -219,5 +224,21 @@ public class SeguridadBean implements Serializable {
         String message = "Un saludo por parte de unishop!" + "\n" + " Para recuperar su contraseña, de click en el siguiente enlace: " + "\n" + url;
 
         mailService.sendMail("pruebayespacio@gmail.com", usuarioAux.getEmail(),subject,message);
+    }
+
+    /**
+     * Metodo para enviar correo con los detalles de la compra
+     */
+    public void correoCompra(ArrayList<ProductoCarrito> productosCarrito)
+    {
+        for(ProductoCarrito p: productosCarrito)
+        {
+            respuesta += "Producto: "+p.getNombre() + "\n" + "Precio: " + p.getPrecio() + "\n" + "Unidades: " + p.getUnidades();
+        }
+        String subject = "Detalle de la compra";
+        String message = "Un saludo por parte de unishop!" + "\n" + "Su compra se a realizado con exito, estos son los detalles de su compra: "
+                +"\n"+ respuesta;
+
+        mailService.sendMail("pruebayespacio@gmail.com", usuarioSesion.getEmail(),subject,message);
     }
 }
