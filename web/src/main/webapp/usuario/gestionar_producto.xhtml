@@ -38,6 +38,9 @@
                     </div>
                     <div class="box">
                         <p>Ciudad: #{gestionProductoBean.producto.ciudad.nombre}</p>
+                        <p>#{gestionProductoBean.producto.unidades} unidades disponibles</p>
+                        <p>con un #{gestionProductoBean.producto.descuento} de descuento</p>
+
                     </div>
                     <p:dataList emptyMessage="No hay categorias para este producto" styleClass="Lista-carac" value="#{detalleProductoBean.producto.categorias}" var="categoria">
                         <f:facet name="header">Categoria</f:facet>
@@ -46,6 +49,52 @@
 
                 </div>
             </div>
+
+            <p:panel header="Descripcion" styleClass="mt-3">
+                <h:outputText value="#{gestionProductoBean.producto.descripcion}" escape="false" />
+            </p:panel>
+
+            <p:panel header="Actualizar Producto" >
+                <h:form>
+                    <h:panelGrid columns="3" cellpadding="5">
+
+
+                        <p:outputLabel for="nombre_producto" value="Nombre:" />
+                        <p:inputText id="nombre_producto" value="#{gestionProductoBean.productoCopy.nombre}" />
+                        <p:message for="nombre_producto" />
+
+                        <p:outputLabel for="precio_producto" value="Precio:" />
+                        <p:inputText id="precio_producto" value="#{gestionProductoBean.productoCopy.precio}"  type="number" />
+                        <p:message for="precio_producto" />
+
+                        <p:outputLabel for="descuento_producto" value="Descuento:" />
+                        <p:inputText id="descuento_producto" value="#{gestionProductoBean.productoCopy.descuento}"  type="number" />
+                        <p:message for="descuento_producto" />
+
+                        <p:outputLabel for="unidades_producto" value="Unidades:" />
+                        <p:inputText id="unidades_producto" value="#{gestionProductoBean.productoCopy.unidades}"  type="number"/>
+                        <p:message for="unidades_producto" />
+
+
+
+                        <p:outputLabel for="ciudad_p" value="Ciudad:" />
+                        <p:selectOneMenu id="ciudad_p" value="#{gestionProductoBean.productoCopy.ciudad}"  requiredMessage="La ciudad es obligatoria" converter="#{ciudadConverter}" >
+                            <f:selectItem itemLabel="Seleccione una Ciudad " noSelectionOption="true"/>
+                            <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"  value="#{productoBean.ciudades}" />
+                        </p:selectOneMenu>
+                        <p:message for="ciudad_p" />
+
+
+
+                        <p:outputLabel for="descripcion_producto" value="Descripcion:" />
+                        <p:textEditor id="descripcion_producto" value="#{gestionProductoBean.productoCopy.descripcion}" height="300" secure="false" />
+                        <p:message for="descripcion_producto" />
+
+                    </h:panelGrid>
+                    <p:growl showDetail="true" for="msj-bean2" />
+                    <p:commandButton value="Actualizar producto" action="#{gestionProductoBean.actualizarProducto}" update="@form" icon="pi pi-desktop"/>
+                </h:form>
+            </p:panel>
         </div>
 
 

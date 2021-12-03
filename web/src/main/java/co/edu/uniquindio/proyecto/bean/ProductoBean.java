@@ -55,6 +55,9 @@ public class ProductoBean implements Serializable {
     @Value("#{seguridadBean.usuarioSesion}")
     private Usuario usuarioSesion;
 
+    @Getter @Setter
+    private List<Producto> productosCategorias;
+
 
     @PostConstruct
     public void inicializar(){
@@ -86,6 +89,11 @@ public class ProductoBean implements Serializable {
 
         }
 
+    }
+
+    public void categoriasNobre(String nombre){
+
+        productosCategorias= productoServicio.productoPorCategoria(nombre);
     }
 
     public void subirImagenes(FileUploadEvent event){

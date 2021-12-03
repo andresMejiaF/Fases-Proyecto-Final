@@ -41,6 +41,8 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public void actualizarProducto(Producto p) throws Exception {
 
+        productoRepo.save(p);
+
     }
 
     @Override
@@ -154,6 +156,13 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public List<Producto> buscarProductoVarios(String cadena) {
         return productoRepo.buscarProductos(cadena);
+    }
+
+    @Override
+    public List<Producto> productoPorCategoria(String nombre) {
+
+
+        return productoRepo.productoCategoria(nombre);
     }
 
 }

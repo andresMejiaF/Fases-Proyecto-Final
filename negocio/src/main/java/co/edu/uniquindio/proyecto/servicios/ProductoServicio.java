@@ -44,4 +44,8 @@ public interface ProductoServicio {
     Float obtenerPromedioCalificacion(String codigoProducto);
 
     List<Producto> buscarProductoVarios(String cadena);
+
+    List<Producto> productoPorCategoria(String nombre);
+
+
 }
