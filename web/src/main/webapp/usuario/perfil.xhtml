@@ -11,7 +11,23 @@
 <ui:define name="title">Mis productos</ui:define>
 <ui:define name="content">
 
-    <h1>Aqui va un perfil xd</h1>
+    <div>
+
+        <h1><img class="align-content-center" src="../resources/img/user.png" alt=""/>  Bienvenido a su perfil <i class="text-capitalize">#{seguridadBean.usuarioSesion.nombre}</i></h1>
+        <p:divider></p:divider>
+        <h4 class="text-muted">Datos del usuario</h4>
+        <br></br>
+        <h4>Nickname: <i class="text-capitalize">#{seguridadBean.usuarioSesion.username}</i></h4>
+        <br></br>
+        <h4>Telefono: <!--poner la ruta del telefono--></h4>
+        <br></br>
+        <h4>Ciudad: <i class="text-capitalize">#{seguridadBean.usuarioSesion.ciudad.nombre}</i> </h4>
+        <br></br>
+        <h4>Email: <i class="text-primary">#{seguridadBean.usuarioSesion.email}</i></h4>
+    </div>
+
+
+
 </ui:define>
 </ui:composition>
 </html>
