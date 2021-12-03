@@ -48,4 +48,7 @@ public interface ProductoServicio {
     List<Producto> productoPorCategoria(String nombre);
 
 
+    List<Producto> productoFavorito(String codigo);
+
+
 }

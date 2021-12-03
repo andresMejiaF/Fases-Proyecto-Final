@@ -54,6 +54,9 @@ public class UsuarioBean implements Serializable {
     private String telefono;
     private ArrayList<String> telefonos;
 
+    @Getter@Setter
+    private List<Producto> favoritos;
+
 
     public UsuarioBean(UsuarioServicio usuarioServicio, ProductoServicio productoServicio, CiudadServicio ciudadServicio) {
         this.usuarioServicio = usuarioServicio;
@@ -98,5 +101,35 @@ public class UsuarioBean implements Serializable {
         mailService.sendMail("pruebayespacio@gmail.com", email,subject,message);
 
     }
+
+   public void agregarFavoritos(String codigo){
+
+        favoritos=productoServicio.productoFavorito(usuarioSesion.getCodigo());
+        favoritos.add(productoServicio.obtenerProducto(codigo));
+
+
+
+        usuarioSesion.setProductosFavoritos(favoritos);
+
+       try {
+           usuarioServicio.actualizarUsuario(usuarioSesion);
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+
+   }
+
+   public void eliminarDeFavoritos(String codigo){
+        favoritos=productoServicio.productoFavorito(usuarioSesion.getCodigo());
+        favoritos.remove(productoServicio.obtenerProducto(codigo));
+
+        usuarioSesion.setProductosFavoritos(favoritos);
+
+       try {
+           usuarioServicio.actualizarUsuario(usuarioSesion);
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+   }
 
 }

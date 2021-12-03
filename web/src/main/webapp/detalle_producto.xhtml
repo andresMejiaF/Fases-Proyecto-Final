@@ -43,8 +43,22 @@
                         <p:rating value="#{detalleProductoBean.calificacionPromedio}" readonly="true" />
                         <p>Ciudad: #{detalleProductoBean.producto.ciudad.nombre}</p>
                         <p>#{detalleProductoBean.producto.unidades} unidades disponibles</p>
-
                     </div>
+
+                    <h:form rendered="#{seguridadBean.autenticado}">
+                    <div class="col-4">
+                        <p:commandButton id="favorito" action="#{usuarioBean.agregarFavoritos(detalleProductoBean.producto.codigo)}"
+                                         icon="pi pi-star-o"
+                                         style="color: #ffcd39"
+                                         styleClass="rounded-button ui-button-warning ui-button-flat"/>
+                        <p:tooltip for="favorito" value="Añadir a mis favoritos" position="right"/>
+                        <p:commandButton id="Nofavorito" action="#{usuarioBean.eliminarDeFavoritos(detalleProductoBean.producto.codigo)}"
+                                         icon="pi pi-trash"
+                                         style="color: red"
+                                         styleClass="rounded-button ui-button-danger ui-button-flat"/>
+                        <p:tooltip for="Nofavorito" value="Eliminar de mis favoritos" position="right"/>
+                    </div>
+                    </h:form>
                     <p:dataList emptyMessage="No hay categorias para este producto" styleClass="Lista-carac" value="#{detalleProductoBean.producto.categorias}" var="categoria">
                         <f:facet name="header">Categoria</f:facet>
                         <p>#{categoria.nombre}</p>

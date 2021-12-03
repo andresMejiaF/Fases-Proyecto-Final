@@ -81,6 +81,10 @@ public interface ProductoRepo extends JpaRepository<Producto, String> {
     Float obtenerPromedioCalificaciones(String codigo);
 
 
+    @Query("select p from Producto p join  p.usuarios u where u.codigo= :codigo ")
+    List<Producto> productosFavoritos(String codigo);
+
+
 
 
 

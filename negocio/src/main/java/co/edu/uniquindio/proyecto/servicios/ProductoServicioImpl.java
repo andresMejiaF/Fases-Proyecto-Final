@@ -165,4 +165,10 @@ public class ProductoServicioImpl implements ProductoServicio {
         return productoRepo.productoCategoria(nombre);
     }
 
+    @Override
+    public List<Producto> productoFavorito(String codigo) {
+
+        return productoRepo.productosFavoritos(codigo);
+    }
+
 }
