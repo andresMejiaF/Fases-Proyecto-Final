@@ -44,8 +44,6 @@ public class DetalleProductoBean implements Serializable {
     @Getter@Setter
     private Integer calificacionPromedio;
 
-
-
     @PostConstruct
     public void inicializar(){
         nuevoComentario= new Comentario();
@@ -72,7 +70,12 @@ public class DetalleProductoBean implements Serializable {
         }
     }
 
-
-
+    /**
+     * Método para eliminar un comentario feo
+     */
+    public void eliminarComentario(Comentario comentario)
+    {
+        productoServicio.eliminarComentario(comentario);
+    }
 
 }

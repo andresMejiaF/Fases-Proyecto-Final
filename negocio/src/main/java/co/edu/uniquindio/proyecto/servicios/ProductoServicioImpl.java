@@ -73,6 +73,11 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
+    public void eliminarComentario(Comentario comentario) {
+        comentarioRepo.delete(comentario);
+    }
+
+    @Override
     public void guardarProductoEnFavoritos(Producto producto, Usuario usuario) throws Exception {
 
     }

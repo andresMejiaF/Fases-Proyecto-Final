@@ -95,9 +95,28 @@
                         <li class="clearfix">
                             <img src="/uploads/avatar.png" class="avatar" alt="" />
                             <div class="post-comments">
-                                <p class="meta">#{comentario.fechaEstilo} <a href="#">#{comentario.usuario.nombre}</a> dijo: <i class="pull-right" style="visibility: hidden"><a href="#"><small>Reply</small></a></i></p>
+                                <p class="meta">#{comentario.fechaEstilo} <a
+                                        href="#">#{comentario.usuario.nombre}</a> dijo:
+                                    <!--Editar comentario-->
+                                    <p:commandButton id="editC"
+                                                     action="#{detalleProductoBean.eliminarComentario(comentario)}"
+                                                     icon="pi pi-pencil"
+                                                     style="color: dodgerblue"
+                                                     styleClass="rounded-button ui-button-danger ui-button-flat float-end"
+                                    />
+                                    <!--Fin-->
+                                    <!--Eliminar comentario-->
+                                    <p:commandButton id="deleteC"
+                                                     action="#{detalleProductoBean.eliminarComentario(comentario)}"
+                                                     icon="pi pi-trash"
+                                                     style="color: red"
+                                                     styleClass="rounded-button ui-button-danger ui-button-flat float-end"
+                                    />
+                                    <!--Fin-->
+                                    <i class="pull-right" style="visibility: hidden"><a
+                                            href="#"><small>Reply</small></a></i></p>
                                 <p>#{comentario.mensaje}</p>
-                                <p:rating readonly="true" value="#{comentario.calificacion}" />
+                                <p:rating readonly="true" value="#{comentario.calificacion}"/>
                             </div>
 
                             <ul class="comments" jsf:rendered="#{comentario.respuesta != null}">
@@ -106,6 +125,8 @@
                                     <div class="post-comments">
                                         <p class="meta">#{comentario.fechaEstilo} <a href="#">#{comentario.producto.vendedor.nombre}</a> dijo: </p>
                                         <p>#{comentario.respuesta}</p>
+
+
                                     </div>
                                 </li>
                             </ul>
