@@ -38,7 +38,15 @@
                                 Inicio
                             </a>
                         </li>
-                      
+
+
+                        <li jsf:rendered="#{seguridadBean.autenticadoAdmin}" >
+                            <a href="/usuario/gestion_usuario.xhtml" class="nav-link text-white" >
+                                <i class="pi pi-users d-block mx-auto mb-1 icon-menu"></i>
+                                Gestion de usuarios
+                            </a>
+                        </li>
+
                         <li jsf:rendered="#{seguridadBean.autenticado}">
                             <a href="/usuario/crear_producto.xhtml" class="nav-link text-white" >
                                 <i class="pi pi-save d-block mx-auto mb-1 icon-menu"></i>

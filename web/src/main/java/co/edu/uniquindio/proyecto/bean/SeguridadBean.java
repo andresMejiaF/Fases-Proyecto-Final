@@ -30,6 +30,9 @@ public class SeguridadBean implements Serializable {
     private boolean autenticado;
 
     @Getter@Setter
+    private boolean autenticadoAdmin;
+
+    @Getter@Setter
     private String email, password;
 
     @Getter@Setter
@@ -91,6 +94,7 @@ public class SeguridadBean implements Serializable {
                 usuarioSesion= usuarioServicio.iniciarSesion(email, password);
                 telefono=usuarioSesion.getTelefonos().get(0);
                 autenticado=true;
+                autenticadoAdmin=true;
                 return "/index?faces-redirect=true";
             } catch (Exception e) {
                 FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
@@ -148,9 +152,10 @@ public class SeguridadBean implements Serializable {
         if(usuarioSesion!=null && !productosCarrito.isEmpty() && agregar!=false) {
             try {
                 productoServicio.comprarProductos(usuarioSesion, productosCarrito, medio);
+                correoCompra(productosCarrito, subTotal);
                 productosCarrito.clear();
                 subTotal=0F;
-                correoCompra(productosCarrito);
+                correoCompra(productosCarrito, subTotal);
                 FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada correctamente");
 
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
@@ -233,15 +238,17 @@ public class SeguridadBean implements Serializable {
     /**
      * Metodo para enviar correo con los detalles de la compra
      */
-    public void correoCompra(ArrayList<ProductoCarrito> productosCarrito)
+    public void correoCompra(ArrayList<ProductoCarrito> productosCarrito, double subTotal)
     {
+
+        respuesta="";
         for(ProductoCarrito p: productosCarrito)
         {
-            respuesta += "Producto: "+p.getNombre() + "\n" + "Precio: " + p.getPrecio() + "\n" + "Unidades: " + p.getUnidades();
+            respuesta +="\n"+ "Producto: "+p.getNombre() + "\n" + "Precio: " + p.getPrecio() + "\n" + "Unidades: " + p.getUnidades() + "\n" +"-----------------" ;
         }
         String subject = "Detalle de la compra";
         String message = "Un saludo por parte de unishop!" + "\n" + "Su compra se a realizado con exito, estos son los detalles de su compra: "
-                +"\n"+ respuesta;
+                +"\n" + respuesta + "\n" + "todo con un total a pagar de: "+ subTotal;
 
         mailService.sendMail("pruebayespacio@gmail.com", usuarioSesion.getEmail(),subject,message);
     }

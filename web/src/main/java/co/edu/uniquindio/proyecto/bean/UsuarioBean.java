@@ -71,8 +71,10 @@ public class UsuarioBean implements Serializable {
         usuario= new Usuario();
         ciudades= ciudadServicio.listarCiudades();
         telefonos= new ArrayList<>();
-        favoritos=productoServicio.productoFavorito(usuarioSesion.getCodigo());
 
+        if(usuarioSesion!=null) {
+            favoritos = productoServicio.productoFavorito(usuarioSesion.getCodigo());
+        }
         try {
             this.productos=productoServicio.listarProductos(usuarioSesion.getCodigo());
             this.productosComprados=productoServicio.listarProductoComprado(usuarioSesion.getCodigo());

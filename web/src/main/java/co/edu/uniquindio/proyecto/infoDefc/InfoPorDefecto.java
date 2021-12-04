@@ -26,6 +26,8 @@ class InformacionPorDefecto implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+
+
         if(ciudadServicio.listarCiudades().isEmpty() ) {
             ciudadServicio.registrarCiudad(new Ciudad("Armenia", 01));
             ciudadServicio.registrarCiudad(new Ciudad("Bogota", 02));
