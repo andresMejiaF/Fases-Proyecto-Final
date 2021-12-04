@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
@@ -73,9 +75,19 @@ public class DetalleProductoBean implements Serializable {
     /**
      * Método para eliminar un comentario feo
      */
-    public void eliminarComentario(Comentario comentario)
+    public void eliminarComentario(Comentario comentario, Usuario usuario)
     {
-        productoServicio.eliminarComentario(comentario);
+
+        if( usuarioSesion!=null && usuario.equals(usuarioSesion)) {
+            productoServicio.eliminarComentario(comentario);
+            FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Comentario eliminado con exito");
+            FacesContext.getCurrentInstance().addMessage("msj-comentario", fm);
+        }else {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Usted no es el usuario que hizo este comentario");
+            FacesContext.getCurrentInstance().addMessage("msj-comentario", fm);
+        }
+
+
     }
 
 }

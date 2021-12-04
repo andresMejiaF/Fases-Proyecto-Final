@@ -121,6 +121,8 @@ public class UsuarioBean implements Serializable {
        } catch (Exception e) {
            e.printStackTrace();
        }
+       FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto agregado a favoritos");
+       FacesContext.getCurrentInstance().addMessage("msj-favoritos", msg);
 
    }
 
@@ -135,5 +137,8 @@ public class UsuarioBean implements Serializable {
        } catch (Exception e) {
            e.printStackTrace();
        }
+
+       FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto eliminado de tus favoritos");
+       FacesContext.getCurrentInstance().addMessage("msj-favoritos", msg);
    }
 }

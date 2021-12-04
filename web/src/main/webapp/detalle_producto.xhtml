@@ -49,13 +49,15 @@
                     <div class="col-4">
                         <p:commandButton id="favorito" action="#{usuarioBean.agregarFavoritos(detalleProductoBean.producto.codigo)}"
                                          icon="pi pi-star-o"
-                                         style="color: #ffcd39"
+                                        update="@form" style="color: #ffcd39"
                                          styleClass="rounded-button ui-button-warning ui-button-flat"/>
+                        <p:growl for="msj-favoritos" showDetail="true" />
                         <p:tooltip for="favorito" value="Añadir a mis favoritos" position="right"/>
                         <p:commandButton id="Nofavorito" action="#{usuarioBean.eliminarDeFavoritos(detalleProductoBean.producto.codigo)}"
                                          icon="pi pi-trash"
-                                         style="color: red"
+                                         update="@form"  style="color: red"
                                          styleClass="rounded-button ui-button-danger ui-button-flat"/>
+                        <p:growl for="msj-favoritos" showDetail="true" />
                         <p:tooltip for="Nofavorito" value="Eliminar de mis favoritos" position="right"/>
                     </div>
                     </h:form>
@@ -98,21 +100,15 @@
                                 <p class="meta">#{comentario.fechaEstilo} <a
                                         href="#">#{comentario.usuario.nombre}</a> dijo:
                                     <!--Editar comentario-->
-                                    <p:commandButton id="editC"
-                                                     action="#{detalleProductoBean.eliminarComentario(comentario)}"
-                                                     icon="pi pi-pencil"
-                                                     style="color: dodgerblue"
-                                                     styleClass="rounded-button ui-button-danger ui-button-flat float-end"
-                                    />
-                                    <!--Fin-->
-                                    <!--Eliminar comentario-->
-                                    <p:commandButton id="deleteC"
-                                                     action="#{detalleProductoBean.eliminarComentario(comentario)}"
-                                                     icon="pi pi-trash"
+                                    <h:form rendered="#{seguridadBean.autenticado}">
+
+                                    <p:commandButton  action="#{detalleProductoBean.eliminarComentario(comentario, comentario.usuario)}"
+                                                    update="@form" icon="pi pi-trash"
                                                      style="color: red"
                                                      styleClass="rounded-button ui-button-danger ui-button-flat float-end"
-                                    />
-                                    <!--Fin-->
+                                    /><p:growl for="msj-comentario" showDetail="true" />
+                                    </h:form>
+
                                     <i class="pull-right" style="visibility: hidden"><a
                                             href="#"><small>Reply</small></a></i></p>
                                 <p>#{comentario.mensaje}</p>
