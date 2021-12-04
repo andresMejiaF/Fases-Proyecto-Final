@@ -74,12 +74,12 @@ public class UsuarioBean implements Serializable {
 
         if(usuarioSesion!=null) {
             favoritos = productoServicio.productoFavorito(usuarioSesion.getCodigo());
-        }
-        try {
-            this.productos=productoServicio.listarProductos(usuarioSesion.getCodigo());
-            this.productosComprados=productoServicio.listarProductoComprado(usuarioSesion.getCodigo());
-        } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                this.productos=productoServicio.listarProductos(usuarioSesion.getCodigo());
+                this.productosComprados=productoServicio.listarProductoComprado(usuarioSesion.getCodigo());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }
