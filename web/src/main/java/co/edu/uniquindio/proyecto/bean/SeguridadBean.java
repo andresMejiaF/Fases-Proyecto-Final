@@ -90,11 +90,12 @@ public class SeguridadBean implements Serializable {
     public String inciarSesion(){
         if(!email.isEmpty() && !password.isEmpty()){
             try {
-
+                if(email.equals("pruebayespacio@gmail.com") && password.equals("admin")){
+                    autenticadoAdmin=true;
+                }
                 usuarioSesion= usuarioServicio.iniciarSesion(email, password);
                 telefono=usuarioSesion.getTelefonos().get(0);
                 autenticado=true;
-                autenticadoAdmin=true;
                 return "/index?faces-redirect=true";
             } catch (Exception e) {
                 FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
@@ -242,8 +243,7 @@ public class SeguridadBean implements Serializable {
     {
 
         respuesta="";
-        for(ProductoCarrito p: productosCarrito)
-        {
+        for(ProductoCarrito p: productosCarrito) {
             respuesta +="\n"+ "Producto: "+p.getNombre() + "\n" + "Precio: " + p.getPrecio() + "\n" + "Unidades: " + p.getUnidades() + "\n" +"-----------------" ;
         }
         String subject = "Detalle de la compra";

@@ -120,4 +120,9 @@ import java.util.Optional;
 
     }
 
+    @Override
+    public Usuario obtenerUsuarioAdmin(String correo) {
+        return usuarioRepo.obtenerUsuarioAdmin(correo);
+    }
+
 }

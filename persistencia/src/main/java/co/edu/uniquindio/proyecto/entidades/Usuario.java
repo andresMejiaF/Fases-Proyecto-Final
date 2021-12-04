@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class Usuario extends Persona implements Serializable {
     private List<String> telefonos;
 
     @Column(nullable = false, length = 150, unique = true)
+    @NotBlank
     private String username;
     @OneToMany(mappedBy = "usuarioComprador")
     @ToString.Exclude
@@ -59,7 +61,10 @@ public class Usuario extends Persona implements Serializable {
         this.username=username;
     }
 
+    public String getImagenPrincipal(){
 
+        return "perfil.png";
+    }
 
 
 

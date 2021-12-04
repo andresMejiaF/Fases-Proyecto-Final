@@ -69,20 +69,18 @@
         </div>
         <div class="row mt-4 d-flex ">
 
-                <h:form styleClass="text-center">
-
-                    <p:outputLabel styleClass="text-center" for="medio_pago" value="Seleccione un medio de pago: " />
-                    <p:selectOneMenu styleClass="center" id="medio_pago" value="#{seguridadBean.medio}" required="true" requiredMessage="El medio de pago es obligatorio para efectuar la compra"  >
-                        <f:selectItem itemLabel="Seleccione un medio " noSelectionOption="true"/>
-                        <f:selectItems var="medio" itemLabel="#{medio}"
-                                       value="#{seguridadBean.mediosPago}" />
-                    </p:selectOneMenu>
-                    <p> </p>
-
-                    <p:commandButton styleClass="bg-primary" value="Comprar" update="@form" icon="pi pi-check" style="font-size: 20px" action="#{seguridadBean.comprar}"/>
-                    <p:growl for="compra-msj" showDetail="true"/>
-                </h:form>
-
+            <h:form styleClass="text-center">
+                <p:outputLabel styleClass="align-content-between left" for="medio_pago" value="Seleccione un medio de pago: " />
+                <p> </p>
+                <p:selectOneMenu styleClass="center" id="medio_pago" value="#{seguridadBean.medio}" required="true" requiredMessage="El medio de pago es obligatorio para efectuar la compra">
+                    <f:selectItem itemLabel="Seleccione un medio " noSelectionOption="true"/>
+                    <f:selectItems var="medio" itemLabel="#{medio}"
+                                   value="#{seguridadBean.mediosPago}" />
+                </p:selectOneMenu>
+                <p> </p>
+                <p:commandButton styleClass="bg-primary btn-group-sm" value="Comprar" update="@form" icon="pi pi-check" style="font-size: 20px" action="#{seguridadBean.comprar}"/>
+                <p:growl for="compra-msj" showDetail="true"/>
+            </h:form>
         </div>
     </ui:define>
 </ui:composition>

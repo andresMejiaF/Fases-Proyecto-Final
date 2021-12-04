@@ -27,5 +27,7 @@ public interface UsuarioServicio {
 
     void cambiarPassword(String email,String passwordN) throws Exception;
 
+    Usuario obtenerUsuarioAdmin(String correo);
+
 
 }

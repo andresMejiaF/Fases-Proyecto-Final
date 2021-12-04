@@ -51,5 +51,10 @@ public interface UsuarioRepo extends JpaRepository <Usuario, String>{
     @Query("select u.telefonos from Usuario  u join u.telefonos where u.codigo=:codigo")
     ArrayList<String> obtenerTelefonos(String codigo);
      */
+
+    @Query("select u from Usuario  u where u.email like concat('%', :correo,'%') ")
+    Usuario obtenerUsuarioAdmin(String correo);
+
+
 }
 

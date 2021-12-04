@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+<ui:composition template="../WEB-INF/template.xhtml">
+<ui:define name="title">#{gestionUsuarioBean.usuario.nombre}</ui:define>
+<ui:define name="content">
+
+    <div class="row">
+    <div class="col-lg-7 col-md-1">
+        <div class="box box-stretched">
+            <p:graphicImage  url="/uploads/#{gestionUsuarioBean.usuario.imagenPrincipal}" />
+        </div>
+
+    </div>
+
+    <div class="col-lg-5 col-md-1" >
+        <div class="p-grid">
+            <div class="box">
+
+                <h1 class="mt-4">#{gestionUsuarioBean.usuario.nombre}</h1>
+                <h1 class="mt-4">#{gestionUsuarioBean.usuario.username}</h1>
+
+                <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
+                    <p:commandButton value="Eliminar" icon="pi pi-trash" update="@form" action="#{gestionUsuarioBean.eliminarUsuario}" />
+                    <p:growl for="add-cart" showDetail="true" />
+                </h:form>
+
+            </div>
+            <div class="box">
+                <p>Ciudad: #{gestionUsuarioBean.usuario.ciudad.nombre}</p>
+                <p>Correo: #{gestionUsuarioBean.usuario.email} </p>
+                <p>Pubicaciones: #{gestionUsuarioBean.usuario.productos.size()} </p>
+                <p>Telefono: #{gestionUsuarioBean.usuario.telefonos.get(0)} </p>
+            </div>
+
+        </div>
+    </div>
+        <p:panel header="Actualizar Usuario" >
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+
+
+                    <p:outputLabel for="nombre_usuario" value="Nombre:" />
+                    <p:inputText id="nombre_usuario" value="#{gestionUsuarioBean.usuarioCopy.nombre}" />
+                    <p:message for="nombre_usuario" />
+
+                    <p:outputLabel for="correo_usuario" value="Email :" />
+                    <p:inputText id="correo_usuario" value="#{gestionUsuarioBean.usuarioCopy.email}"   />
+                    <p:message for="correo_usuario" />
+
+                    <p:outputLabel for="username_usuario" value="Username:" />
+                    <p:inputText id="username_usuario" value="#{gestionUsuarioBean.usuarioCopy.username}" />
+                    <p:message for="username_usuario" />
+
+                    <p:outputLabel for="telefono_usuario" value="Telefono:"  />
+                    <p:inputText id="telefono_usuario" value="#{gestionUsuarioBean.telefono}"  required="true" />
+                    <p:message for="telefono_usuario" />
+
+
+
+
+                    <p:outputLabel for="ciudad_p" value="Ciudad:" />
+                    <p:selectOneMenu id="ciudad_p" value="#{gestionUsuarioBean.usuarioCopy.ciudad}"  requiredMessage="La ciudad es obligatoria" converter="#{ciudadConverter}" >
+                        <f:selectItem itemLabel="Seleccione una Ciudad " noSelectionOption="true"/>
+                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"  value="#{usuarioBean.ciudades}" />
+                    </p:selectOneMenu>
+                    <p:message for="ciudad_p" />
+
+
+                </h:panelGrid>
+                <p:growl showDetail="true" for="msj-bean3" />
+                <p:commandButton value="Actualizar usuario" action="#{gestionUsuarioBean.actualizarUsuario}" update="@form" icon="pi pi-desktop"/>
+            </h:form>
+        </p:panel>
+    </div>
+</ui:define>
+</ui:composition>
+</html>

@@ -3,13 +3,16 @@ package co.edu.uniquindio.proyecto.infoDefc;
 
 import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.CategoriaServicio;
 import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
+import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import jdk.dynalink.linker.LinkerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -19,13 +22,30 @@ class InformacionPorDefecto implements CommandLineRunner {
     private  CiudadServicio ciudadServicio;
     @Autowired
     private CategoriaServicio categoriaServicio;
-
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
 
 
     @Override
     public void run(String... args) throws Exception {
+        Usuario usuario = usuarioServicio.obtenerUsuarioAdmin("pruebayespacio@gmail.com");
 
+        if(usuario==null){
+            ciudadServicio.registrarCiudad(new Ciudad("Cali", 000));
+            Ciudad ciudad= ciudadServicio.obtenerCiudad(000);
+            usuario= new Usuario();
+            List<String> telef= new ArrayList<>();
+            telef.add("322 928 0432");
+            usuario.setCodigo("0000");
+            usuario.setNombre("Admin_SAJV");
+            usuario.setEmail("pruebayespacio@gmail.com");
+            usuario.setPassword("admin");
+            usuario.setUsername("ADMINISTRADOR");
+            usuario.setCiudad(ciudad);
+            usuario.setTelefonos(telef);
+            usuarioServicio.registrarUsuario(usuario);
+        }
 
 
         if(ciudadServicio.listarCiudades().isEmpty() ) {
