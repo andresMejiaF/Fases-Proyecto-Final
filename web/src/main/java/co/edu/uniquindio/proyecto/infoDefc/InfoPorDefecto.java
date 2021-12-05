@@ -31,22 +31,6 @@ class InformacionPorDefecto implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Usuario usuario = usuarioServicio.obtenerUsuarioAdmin("pruebayespacio@gmail.com");
 
-        if(usuario==null){
-            ciudadServicio.registrarCiudad(new Ciudad("Cali", 000));
-            Ciudad ciudad= ciudadServicio.obtenerCiudad(000);
-            usuario= new Usuario();
-            List<String> telef= new ArrayList<>();
-            telef.add("322 928 0432");
-            usuario.setCodigo("0000");
-            usuario.setNombre("Admin_SAJV");
-            usuario.setEmail("pruebayespacio@gmail.com");
-            usuario.setPassword("admin");
-            usuario.setUsername("ADMINISTRADOR");
-            usuario.setCiudad(ciudad);
-            usuario.setTelefonos(telef);
-            usuarioServicio.registrarUsuario(usuario);
-        }
-
 
         if(ciudadServicio.listarCiudades().isEmpty() ) {
             ciudadServicio.registrarCiudad(new Ciudad("Armenia", 01));
@@ -68,6 +52,25 @@ class InformacionPorDefecto implements CommandLineRunner {
             categoriaServicio.registrarCategoria(new Categoria("06", "Electrodomesticos" ));
             categoriaServicio.registrarCategoria(new Categoria("09", "Otros" ));
         }
+
+        if(usuario==null){
+            ciudadServicio.registrarCiudad(new Ciudad("Cali", 000));
+            Ciudad ciudad= ciudadServicio.obtenerCiudad(000);
+            usuario= new Usuario();
+            List<String> telef= new ArrayList<>();
+            telef.add("322 928 0432");
+            usuario.setCodigo("0000");
+            usuario.setNombre("Admin_SAJV");
+            usuario.setEmail("pruebayespacio@gmail.com");
+            usuario.setPassword("admin");
+            usuario.setUsername("ADMINISTRADOR");
+            usuario.setCiudad(ciudad);
+            usuario.setTelefonos(telef);
+            usuarioServicio.registrarUsuario(usuario);
+        }
+
+
+
 
 
 

@@ -88,9 +88,6 @@ public class GestionUsuarioBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("msj-bean3", fm);
             e.printStackTrace();
         }
-
-
-
     }
 
 
