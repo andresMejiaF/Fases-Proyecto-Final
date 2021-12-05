@@ -2,11 +2,9 @@ package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
 import co.edu.uniquindio.proyecto.entidades.Producto;
+import co.edu.uniquindio.proyecto.entidades.Subasta;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
-import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
-import co.edu.uniquindio.proyecto.servicios.MailService;
-import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
-import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
+import co.edu.uniquindio.proyecto.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +33,8 @@ public class UsuarioBean implements Serializable {
 
     private final CiudadServicio ciudadServicio;
 
+    private SubastaServicio subastaServicio;
+
     @Getter @Setter
     private Ciudad ciudad;
     @Getter @Setter
@@ -59,11 +59,15 @@ public class UsuarioBean implements Serializable {
     @Getter@Setter
     private List<Producto> productosFavoritos;
 
+    @Getter @Setter
+    private List<Subasta> subastas;
 
-    public UsuarioBean(UsuarioServicio usuarioServicio, ProductoServicio productoServicio, CiudadServicio ciudadServicio) {
+    public UsuarioBean(UsuarioServicio usuarioServicio, ProductoServicio productoServicio, CiudadServicio ciudadServicio,
+                       SubastaServicio subastaServicio) {
         this.usuarioServicio = usuarioServicio;
         this.productoServicio = productoServicio;
         this.ciudadServicio = ciudadServicio;
+        this.subastaServicio = subastaServicio;
     }
 
     @PostConstruct
@@ -77,6 +81,7 @@ public class UsuarioBean implements Serializable {
             try {
                 this.productos=productoServicio.listarProductos(usuarioSesion.getCodigo());
                 this.productosComprados=productoServicio.listarProductoComprado(usuarioSesion.getCodigo());
+                this.subastas=subastaServicio.listarSubastas(usuarioSesion.getCodigo());
             } catch (Exception e) {
                 e.printStackTrace();
             }

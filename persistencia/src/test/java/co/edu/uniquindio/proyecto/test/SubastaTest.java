@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 /**
  * Se crean los archivos de testeo para Subasta,
@@ -35,7 +36,7 @@ public class SubastaTest {
 
         Producto producto = productoRepo.findById("9090").orElse(null);
 
-        Subasta subasta= new Subasta("234", LocalDate.now(), producto );
+        Subasta subasta= new Subasta("234", LocalDateTime.now(), producto );
 
         Subasta subastaGuardado= subastaRepo.save(subasta);
         System.out.println(subastaGuardado);

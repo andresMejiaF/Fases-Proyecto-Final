@@ -5,7 +5,6 @@ import co.edu.uniquindio.proyecto.entidades.Subasta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 
@@ -23,4 +22,7 @@ public interface SubastaRepo extends JpaRepository<Subasta, String>  {
     //subastas que aun estan disponibles
     @Query("select s from Subasta s where current_timestamp < s.fechaSubasta")
     List<Subasta> listarSubastasDisponibles();
+
+    @Query("select s from Subasta s join s.vendedor u where u.codigo=:codigo")
+    List<Subasta> listarPorCodUsuario(String codigo);
 }

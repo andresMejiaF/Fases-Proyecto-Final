@@ -40,7 +40,39 @@
                         </div>
                         <div class="col-lg-2 col-md-1 align-self-center" >
                             <p:commandButton value="Gestionar" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irAGestion(producto.codigo)}" />
+                            <p:commandButton value="Subastar" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irASubasta(producto.codigo)}" />
+                        </div>
+                    </div>
+                </p:dataViewListItem>
+            </p:dataView>
+        </h:form>
 
+        <h1> Tus productos en subasta son </h1>
+        <h:form>
+            <p:dataView value="#{usuarioBean.subastas}"  var="subasta" gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+
+                <p:dataViewListItem>
+                    <div class="row d-flex item-pro" >
+                        <div class="col-lg-2 col-md-1" style="text-align: center" >
+                            <p:graphicImage url="/uploads/#{subasta.producto.imagenPrincipal}" styleClass="imagen-producto" />
+
+                        </div>
+                        <div class="col-lg-8 col-md-1 align-self-center" >
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{subasta.producto.nombre}" style="font-weight: bold" />
+                                    <h:outputText value="Precio:" />
+                                    <h:outputText value="$#{subasta.producto.precio}" />
+                                    <h:outputText value="Categorías:"/>
+                                    <h:outputText value="#{subasta.producto.categorias}" />
+                                    <h:outputText value="Unidades:"/>
+                                    <h:outputText value="#{subasta.producto.unidades}" />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </div>
+                        <div class="col-lg-2 col-md-1 align-self-center" >
+                            <p:commandButton value="Gestionar" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irAGestionSubasta(subasta.codigo)}" />
                         </div>
                     </div>
                 </p:dataViewListItem>

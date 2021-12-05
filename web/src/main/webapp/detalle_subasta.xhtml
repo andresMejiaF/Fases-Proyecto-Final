@@ -32,7 +32,7 @@
                         <h1 class="mt-4">$#{detalleProductoBean.producto.precio}</h1>
 
                         <p:inputText id="valor_ofertado" required="true" type="number" />
-                        <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
+                        <h:form class="mt-4">
 
                             <p:commandButton value="Ofrecer" icon="pi pi-shopping-cart" update="@form"  action="#{detalleProductoBean.crearOferta}" />
                             <p:growl showDetail="true" for="msj-bean" />

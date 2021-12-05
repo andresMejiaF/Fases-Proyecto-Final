@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Subasta;
 import co.edu.uniquindio.proyecto.excepciones.SubastaNoEncontradaExcepcion;
 

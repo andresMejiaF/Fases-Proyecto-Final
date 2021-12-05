@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.Subasta;
-import co.edu.uniquindio.proyecto.excepciones.ProductoNoEncontradoException;
 import co.edu.uniquindio.proyecto.excepciones.SubastaNoEncontradaExcepcion;
 import co.edu.uniquindio.proyecto.repositorios.SubastaRepo;
 import org.springframework.beans.factory.annotation.Autowired;

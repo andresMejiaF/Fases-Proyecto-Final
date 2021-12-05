@@ -90,4 +90,9 @@ public class DetalleProductoBean implements Serializable {
 
     }
 
+    public void crearOferta() {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Oferta realizada!");
+        FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
+    }
+
 }
