@@ -80,7 +80,7 @@ public class DetalleProductoBean implements Serializable {
 
         if( usuarioSesion!=null && usuario.equals(usuarioSesion)) {
             productoServicio.eliminarComentario(comentario);
-            FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Comentario eliminado con exito");
+            FacesMessage fm= new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El comentario se a eliminado con exito");
             FacesContext.getCurrentInstance().addMessage("msj-comentario", fm);
         }else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Usted no es el usuario que hizo este comentario");
