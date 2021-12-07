@@ -87,7 +87,7 @@ public class ProductoRestController {
         try {
             List<Producto> productos= productoServicio.productoPropietario(codigo);
             return ResponseEntity.status(200).body(productos);
-            
+
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
         }

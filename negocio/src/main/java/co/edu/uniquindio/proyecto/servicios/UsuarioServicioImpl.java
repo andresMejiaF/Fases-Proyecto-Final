@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.proyecciones.UsuarioBase;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ import java.util.Optional;
         if(buscado.isPresent()){
             throw new Exception("El Username del usuario ya existe");
         }
+
+        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+        u.setPassword(passwordEncryptor.encryptPassword( u.getPassword()));
 
         return usuarioRepo.save(u);
     }
@@ -92,8 +96,14 @@ import java.util.Optional;
     @Override
     public Usuario iniciarSesion(String email, String password) throws Exception {
 
-        return usuarioRepo.findByEmailAndPassword(email, password).orElseThrow(() -> new Exception("Los datos de autenticacion son incorrectos"));
-
+       // return usuarioRepo.findByEmailAndPassword(email, password).orElseThrow(() -> new Exception("Los datos de autenticacion son incorrectos"));
+        Usuario usuarioEmail = usuarioRepo.findByEmail(email).orElseThrow(() -> new Exception("Los datos de autenticacion son incorrectos"));
+        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+        if(passwordEncryptor.checkPassword(password, usuarioEmail.getPassword())){
+            return usuarioEmail;
+        }else {
+            throw new Exception("La contraseña es incorrecta");
+        }
     }
 
     @Override
