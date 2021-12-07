@@ -52,6 +52,12 @@ public interface ProductoServicio {
 
     List<Producto> productoFavorito(String codigo);
 
+    List<Producto> productosPorRango(double valor1, double valor2);
+
+    List<Producto> productoPorUnidades(int unidades);
+
+    List<Producto> productoPropietario(String codigo) throws Exception;
+
 
 
 

@@ -84,6 +84,16 @@ public interface ProductoRepo extends JpaRepository<Producto, String> {
     @Query("select p from Producto p join  p.usuarios u where u.codigo= :codigo ")
     List<Producto> productosFavoritos(String codigo);
 
+    @Query("select p from Producto p where p.precio between :valor1 and :valor2")
+    List<Producto> productoRangoPrecio(double valor1, double valor2);
+
+
+    @Query("select  p from Producto p where p.unidades >= :unidades")
+    List<Producto> productoUnidadesMayor(int unidades);
+
+    @Query("select p from Producto  p where p.vendedor.codigo = :codigo")
+    List<Producto> productoPropietario(String codigo);
+
 
 
 

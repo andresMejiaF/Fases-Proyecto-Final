@@ -27,21 +27,29 @@ public class ProductoServicioImpl implements ProductoServicio {
     private ComentarioRepo comentarioRepo;
     @Autowired
     private CompraRepo compraRepo;
+    @Autowired
+    private UsuarioRepo usuarioRepo;
 
 
 
     @Override
     public Producto publicarProducto(Producto producto) throws Exception {
-        try {
-            return productoRepo.save(producto);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+        Optional<Producto> buscado = productoRepo.findById(producto.getCodigo());
+        if(buscado.isPresent()){
+            throw new Exception("El codigo del producto ya existe");
         }
+            return productoRepo.save(producto);
+
     }
 
     @Override
     public void actualizarProducto(Producto p) throws Exception {
 
+
+        Optional<Producto> buscado = productoRepo.findById(p.getCodigo());
+        if(buscado.isEmpty()){
+            throw new Exception("El codigo no existe");
+        }
         productoRepo.save(p);
 
     }
@@ -183,5 +191,27 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return productoRepo.productosFavoritos(codigo);
     }
+
+    @Override
+    public List<Producto> productosPorRango(double valor1, double valor2) {
+        return productoRepo.productoRangoPrecio(valor1, valor2);
+    }
+
+    @Override
+    public List<Producto> productoPorUnidades(int unidades) {
+        return productoRepo.productoUnidadesMayor(unidades);
+    }
+
+    @Override
+    public List<Producto> productoPropietario(String codigo) throws Exception{
+
+        Optional<Usuario> buscado = usuarioRepo.findById(codigo);
+
+        if(buscado.isEmpty()){
+            throw new Exception("El codigo no existe");
+        }
+        return productoRepo.productoPropietario(codigo);
+    }
+
 
 }
