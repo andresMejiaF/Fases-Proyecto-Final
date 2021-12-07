@@ -37,7 +37,7 @@ public interface UsuarioRepo extends JpaRepository <Usuario, String>{
 
     Page<Usuario> findAll(Pageable paginador);
     //Corregir para que liste los favoritos ( es que hay dos)
-    @Query ("select p from Usuario u, IN (u.productosFavoritos) p where u.email = : email")
+    @Query ("select p from Usuario u, IN (u.productosFavoritos) p where u.email = :email")
     List <Producto> obtenerProductoFavoritos(String email);
 
     @Query("select  u.email,u.nombre, p from Usuario  u left join  u.productos p")
