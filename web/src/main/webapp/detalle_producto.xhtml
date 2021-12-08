@@ -13,19 +13,27 @@
     <ui:define name="title">#{detalleProductoBean.producto.nombre}</ui:define>
     <ui:define name="content">
 
+        <div id="fb-root"></div>
+        <script async="true" defer="true" crossorigin="anonymous"
+                src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v12.0&amp;appId=406506983855391&amp;autoLogAppEvents=1"
+                nonce="ylDHl59T"></script>
+
 
         <div class="row">
             <div class="col-lg-7 col-md-1">
                 <div class="box box-stretched">
-                    <p:galleria rendered="#{detalleProductoBean.producto.imagenes.size() > 0}" value="#{detalleProductoBean.producto.imagenes}" var="imagen">
-                        <p:graphicImage url="/uploads/#{imagen}" alt="Image Description for #{imagen}" title="#{imagen}" />
+                    <p:galleria rendered="#{detalleProductoBean.producto.imagenes.size() > 0}"
+                                value="#{detalleProductoBean.producto.imagenes}" var="imagen">
+                        <p:graphicImage url="/uploads/#{imagen}" alt="Image Description for #{imagen}"
+                                        title="#{imagen}"/>
                     </p:galleria>
-                    <P:graphicImage rendered="#{detalleProductoBean.producto.imagenes.size() == 0}" url="/uploads/#{detalleProductoBean.producto.imagenPrincipal}" />
+                    <P:graphicImage rendered="#{detalleProductoBean.producto.imagenes.size() == 0}"
+                                    url="/uploads/#{detalleProductoBean.producto.imagenPrincipal}"/>
                 </div>
 
             </div>
 
-            <div class="col-lg-5 col-md-1" >
+            <div class="col-lg-5 col-md-1">
                 <div class="p-grid">
                     <div class="box">
 
@@ -35,34 +43,52 @@
 
                         <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
 
-                            <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart" update="@form" action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.codigo,detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre, detalleProductoBean.producto.imagenPrincipal )}" />
-                             <p:growl for="add-cart" showDetail="true" />
+                            <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart" update="@form"
+                                             action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.codigo,detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre, detalleProductoBean.producto.imagenPrincipal )}"/>
+                            <p:growl for="add-cart" showDetail="true"/>
                         </h:form>
 
                     </div>
                     <div class="box">
-                        <p:rating value="#{detalleProductoBean.calificacionPromedio}" readonly="true" />
+                        <p:rating value="#{detalleProductoBean.calificacionPromedio}" readonly="true"/>
                         <p>Ciudad: #{detalleProductoBean.producto.ciudad.nombre}</p>
                         <p>#{detalleProductoBean.producto.unidades} unidades disponibles</p>
+
+                        <div class="fb-share-button" data-href="https://naturaaeternum.bandcamp.com/"
+                             data-layout="button_count" data-size="small"><a target="_blank"
+                                                                             href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaturaaeternum.bandcamp.com%2F&amp;src=sdkpreparse"
+                                                                             class="fb-xfbml-parse-ignore">Compartir</a>
+                        </div>
+                        <p></p>
+                        <blockquote>
+
+                            <a class="button twitter-share-button" data-size="large" href="https://twitter.com/intent/tweet?text=Su%20producto%20http://localhost:8080/detalle_producto.xhtml?producto=#{detalleProductoBean.producto.codigo}"
+
+                               data-url="http://localhost:8080/detalle_producto.xhtml?producto=#{detalleProductoBean.producto.codigo}">Tweet</a>
+                        </blockquote>
+                        <script async="true" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
 
                     <h:form rendered="#{seguridadBean.autenticado}">
-                    <div class="col-4">
-                        <p:commandButton id="favorito" action="#{usuarioBean.agregarFavoritos(detalleProductoBean.producto.codigo)}"
-                                         icon="pi pi-star-o"
-                                        update="@form" style="color: #ffcd39"
-                                         styleClass="rounded-button ui-button-warning ui-button-flat"/>
-                        <p:growl for="msj-favoritos" showDetail="true" />
-                        <p:tooltip for="favorito" value="Añadir a mis favoritos" position="right"/>
-                        <p:commandButton id="Nofavorito" action="#{usuarioBean.eliminarDeFavoritos(detalleProductoBean.producto.codigo)}"
-                                         icon="pi pi-trash"
-                                         update="@form"  style="color: red"
-                                         styleClass="rounded-button ui-button-danger ui-button-flat"/>
-                        <p:growl for="msj-favoritos" showDetail="true" />
-                        <p:tooltip for="Nofavorito" value="Eliminar de mis favoritos" position="right"/>
-                    </div>
+                        <div class="col-4">
+                            <p:commandButton id="favorito"
+                                             action="#{usuarioBean.agregarFavoritos(detalleProductoBean.producto.codigo)}"
+                                             icon="pi pi-star-o"
+                                             update="@form" style="color: #ffcd39"
+                                             styleClass="rounded-button ui-button-warning ui-button-flat"/>
+                            <p:growl for="msj-favoritos" showDetail="true"/>
+                            <p:tooltip for="favorito" value="Añadir a mis favoritos" position="right"/>
+                            <p:commandButton id="Nofavorito"
+                                             action="#{usuarioBean.eliminarDeFavoritos(detalleProductoBean.producto.codigo)}"
+                                             icon="pi pi-trash"
+                                             update="@form" style="color: red"
+                                             styleClass="rounded-button ui-button-danger ui-button-flat"/>
+                            <p:growl for="msj-favoritos" showDetail="true"/>
+                            <p:tooltip for="Nofavorito" value="Eliminar de mis favoritos" position="right"/>
+                        </div>
                     </h:form>
-                    <p:dataList emptyMessage="No hay categorias para este producto" styleClass="Lista-carac" value="#{detalleProductoBean.producto.categorias}" var="categoria">
+                    <p:dataList emptyMessage="No hay categorias para este producto" styleClass="Lista-carac"
+                                value="#{detalleProductoBean.producto.categorias}" var="categoria">
                         <f:facet name="header">Categoria</f:facet>
                         <p>#{categoria.nombre}</p>
                     </p:dataList>
@@ -71,45 +97,45 @@
             </div>
         </div>
 
-      
 
         <p:panel header="Descripcion" styleClass="mt-3">
-            <h:outputText value="#{detalleProductoBean.producto.descripcion}" escape="false" />
+            <h:outputText value="#{detalleProductoBean.producto.descripcion}" escape="false"/>
         </p:panel>
 
-        <p:panel header="Hacer un comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado}" >
+        <p:panel header="Hacer un comentario" styleClass="mt-3" rendered="#{seguridadBean.autenticado}">
             <h:form id="crear-comentario">
                 <h:panelGrid columns="2" cellpadding="3">
                     <p:inputTextarea value="#{detalleProductoBean.nuevoComentario.mensaje}"
-                                     required="true" styleClass="comentario-usuario" />
+                                     required="true" styleClass="comentario-usuario"/>
 
                     <p:rating required="true" value="#{detalleProductoBean.nuevoComentario.calificacion}"/>
                 </h:panelGrid>
-                <p:commandButton value="Comentar" icon="pi pi-comment" iconPos="left" update="@form,lista-com" styleClass="mt-4" action="#{detalleProductoBean.crearComentario}" />
-                <p:growl for="msj-pregunta" showDetail="true" />
+                <p:commandButton value="Comentar" icon="pi pi-comment" iconPos="left" update="@form,lista-com"
+                                 styleClass="mt-4" action="#{detalleProductoBean.crearComentario}"/>
+                <p:growl for="msj-pregunta" showDetail="true"/>
             </h:form>
         </p:panel>
 
 
-
-
         <p:panel header="Comentarios" styleClass="mt-3">
             <div class="blog-comment">
-                <ul class="comments" >
-                    <p:dataList id="lista-com" value="#{detalleProductoBean.comentarios}" var="comentario" emptyMessage="No hay comentarios" type="definition">
+                <ul class="comments">
+                    <p:dataList id="lista-com" value="#{detalleProductoBean.comentarios}" var="comentario"
+                                emptyMessage="No hay comentarios" type="definition">
                         <li class="clearfix">
-                            <img src="/uploads/avatar.png" class="avatar" alt="" />
+                            <img src="/uploads/avatar.png" class="avatar" alt=""/>
                             <div class="post-comments">
                                 <p class="meta">#{comentario.fechaEstilo} <a
                                         href="#">#{comentario.usuario.nombre}</a> dijo:
                                     <!--Editar comentario-->
                                     <h:form rendered="#{seguridadBean.autenticado}">
 
-                                    <p:commandButton  action="#{detalleProductoBean.eliminarComentario(comentario, comentario.usuario)}"
-                                                    update="@form" icon="pi pi-trash"
-                                                     style="color: red"
-                                                     styleClass="rounded-button ui-button-danger ui-button-flat float-end"
-                                    /><p:growl for="msj-comentario" showDetail="true" />
+                                        <p:commandButton
+                                                action="#{detalleProductoBean.eliminarComentario(comentario, comentario.usuario)}"
+                                                update="@form" icon="pi pi-trash"
+                                                style="color: red"
+                                                styleClass="rounded-button ui-button-danger ui-button-flat float-end"
+                                        /><p:growl for="msj-comentario" showDetail="true"/>
                                     </h:form>
 
                                     <i class="pull-right" style="visibility: hidden"><a
@@ -120,9 +146,10 @@
 
                             <ul class="comments" jsf:rendered="#{comentario.respuesta != null}">
                                 <li class="clearfix">
-                                    <img src="/uploads/avatar.png" class="avatar" alt="" />
+                                    <img src="/uploads/avatar.png" class="avatar" alt=""/>
                                     <div class="post-comments">
-                                        <p class="meta">#{comentario.fechaEstilo} <a href="#">#{comentario.producto.vendedor.nombre}</a> dijo: </p>
+                                        <p class="meta">#{comentario.fechaEstilo} <a
+                                                href="#">#{comentario.producto.vendedor.nombre}</a> dijo: </p>
                                         <p>#{comentario.respuesta}</p>
 
 
