@@ -125,7 +125,10 @@ import java.util.Optional;
         Usuario personaEncontrada = obtenerPersonaEmail(email);
 
         if (personaEncontrada!=null){
-            personaEncontrada.setPassword(passwordN);
+            //personaEncontrada.setPassword(passwordN);
+
+            StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+            personaEncontrada.setPassword(passwordEncryptor.encryptPassword(passwordN));
             usuarioRepo.save(personaEncontrada);
         }else{
             throw new Exception("No existe una persona con el correo dado");
