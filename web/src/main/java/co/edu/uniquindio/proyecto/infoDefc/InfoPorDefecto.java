@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +70,6 @@ class InformacionPorDefecto implements CommandLineRunner {
             usuario.setTelefonos(telef);
             usuarioServicio.registrarUsuario(usuario);
         }
-
 
 
 

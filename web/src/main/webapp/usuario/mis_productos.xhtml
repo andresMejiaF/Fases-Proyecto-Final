@@ -42,8 +42,11 @@
                             <p:commandButton value="Gestionar" styleClass="ui-button-raised col-md-8" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irAGestion(producto.codigo)}" />
                             <p> </p>
                             <p:commandButton value="Subastar " styleClass="ui-button-raised col-md-8" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irASubasta(producto.codigo)}" />
+                            <p> </p>
+                            <p:commandButton value="Generar Reportes" styleClass="ui-button-raised col-md-8" icon="pi pi-arrow-right" iconPos="right" action="#{usuarioBean.CrearCiudadProductos}" />
                         </div>
                     </div>
+
                 </p:dataViewListItem>
             </p:dataView>
         </h:form>

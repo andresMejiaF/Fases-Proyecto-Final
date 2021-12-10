@@ -54,10 +54,10 @@ public class SubastaBean implements Serializable {
                 subasta.setProducto(producto);
                 subasta.setFechaSubasta(calcularFechaSubasta());
                 subasta.setVendedor(usuarioSesion);
-                subastaServicio.publicarSubasta(subasta);
+             }
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto en subasta!");
                 FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
-            }
+
         } catch (Exception e) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("msj-bean", fm);
