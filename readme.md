@@ -6,4 +6,4 @@ Version actual: Unishop web
 persistencia/src/main/resources/application.properties
 spring.datasource.password="su contraseña"
 
-Unishop v0.98
+Unishop v0.99
